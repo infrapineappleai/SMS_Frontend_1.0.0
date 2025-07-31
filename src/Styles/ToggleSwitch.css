@@ -1,0 +1,91 @@
+/* Container holding 'Status' label and toggle */
+.status-toggle-container {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18.33px;
+  flex-wrap: wrap;
+  margin-right: 15px;
+}
+
+/* Left-side "Status" label */
+.status-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+/* Toggle wrapper: includes switch and status (Active/Inactive) */
+.toggle-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+/* The toggle switch itself */
+.toggle-switch {
+  cursor: pointer;
+}
+
+/* The track/background of the switch */
+.toggle-track {
+  width: 33px;
+  height: 16px;
+  border: 2px solid #1F6978;
+  border-radius: 12px;
+  background-color: #ffffff;
+  position: relative;
+  transition: background-color 0.3s ease;
+}
+
+/* The toggle ball inside */
+.toggle-ball {
+  width: 10px;
+  height: 10px;
+  background-color: #747373;
+  border-radius: 50%;
+  position: absolute;
+  top: 1px;
+  left: 0;  /* change this from right: 0 to left: 0 */
+  transition: transform 0.3s ease;
+}
+
+
+/* Right side Active/Inactive label */
+.toggle-state-label {
+  font-size: 16px;
+  font-weight: 400;
+  color: #000000;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .status-toggle-container {
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 10px;
+  }
+
+  .status-label {
+    font-size: 13px;
+  }
+
+  .toggle-track {
+    width: 45px;
+    height: 22px;
+  }
+
+  .toggle-ball {
+    width: 18px;
+    height: 18px;
+    top: 2px;
+  }
+
+  .toggle-wrapper {
+    gap: 8px;
+  }
+
+  .toggle-state-label {
+    font-size: 13px;
+  }
+}

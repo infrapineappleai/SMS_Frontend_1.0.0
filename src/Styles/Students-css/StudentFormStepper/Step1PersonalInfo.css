@@ -1,0 +1,397 @@
+/* === Step1 Personal Info with Profile Upload === */
+.step-one-fields-with-image {
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/* 🚫 Hide default calendar icon in Chrome, Safari, Edge */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  opacity: 0;
+  display: none;
+  -webkit-appearance: none;
+}
+
+/* For Firefox */
+input[type="date"]::-moz-focus-inner {
+  border: 0;
+}
+
+/* Optional: Disable native styling entirely */
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+}
+
+
+
+/* Remove default arrow on select (Chrome, Edge, Safari) */
+select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: transparent; /* optional, for consistent background */
+}
+
+/* Remove default arrow for Firefox */
+select::-ms-expand {
+  display: none;
+}
+
+
+
+/* Step1 Form Section */
+.step1-form-section {
+  width: 100%;       /* take full width */
+  max-width: 600px;  /* or desired max width */
+}
+
+/* Input Fields */
+.form-row {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+
+
+.input-label {
+  font-weight: 500;
+  margin-bottom: 5px;
+}
+
+/* Inputs */
+input[type="text"],
+input[type="date"],
+select {
+  padding: 10px 12px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Montserrat';
+}
+
+.input-box.with-icon {
+  padding-right: 30px;
+  position: relative;
+}
+
+/* Icon Container */
+.input-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-icon {
+  position: absolute;
+  right: 10px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+}
+
+.calendar-icon {
+  top: 12px;
+}
+
+.dropdown-icon {
+  top: 12px;
+}
+
+/* Error Text */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+/* === STEP 1 Personal Info Container === */
+.step-one-fields-with-image {
+  padding: 24px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+
+
+/* Form Rows */
+
+
+
+/* Inputs and Selects */
+input[type="text"],
+input[type="date"],
+select {
+  padding: 10px 14px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-family: 'Montserrat';
+  width: 100%;
+}
+
+.input-icon-container {
+  position: relative;
+}
+
+.input-box.with-icon {
+  padding-right: 36px;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  right: 12px;
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+/* Specific Icons */
+.calendar-icon {
+  width: 18px;
+  height: 16px;
+}
+
+.dropdown-icon {
+  width: 14px;
+  height: 8px;
+  filter: grayscale(100%) brightness(0) sepia(1) hue-rotate(180deg) saturate(300%) contrast(0.8);
+}
+
+/* Error Messages */
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+
+.form-group textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;  /* make font consistent */
+  width: 100%;           /* fill container width */
+  box-sizing: border-box; /* include padding in width */
+  resize: vertical;       /* allow vertical resizing */
+  min-height: 80px;       /* optional, for initial height */
+}
+.form-group input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+/* Profile Upload Container - Centered */
+.profile-upload-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  margin: 0 auto 30px; /* center horizontally, add bottom spacing */
+  width: 140px; /* fixed width to keep alignment */
+}
+
+/* Profile Image Label - Circle with dashed border */
+.profile-upload-label {
+  cursor: pointer;
+  border: 2px solid #1f6978;
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: border-color 0.3s ease;
+}
+
+.profile-upload-label:hover {
+  border-color: #145360;
+}
+
+/* Upload Placeholder Text */
+.upload-placeholder {
+  font-size: 14px;
+  color: #1f6978;
+  text-align: center;
+  font-weight: 500;
+  padding: 10px;
+}
+
+/* Profile Image Preview */
+.profile-preview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Upload Button - full width of container, below image */
+.upload-btn {
+  padding: 10px 0;
+  width: 120px; /* same width as profile pic */
+  background-color: #1f6978;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  text-align: center;
+}
+
+.upload-btn:hover {
+  background-color: #145360;
+}
+
+.step1-top-row {
+  display: flex;
+  flex-direction: column; /* stack vertically */
+  align-items: flex-start;    /* center horizontally */
+  gap: 30px;              /* spacing between profile upload and form */
+  width: 100%;            /* full width */
+  max-width: 600px;       /* or whatever max width you want */
+  margin: 0 auto;         /* center entire block in parent */
+}
+
+/* Step 1 Personal Info - form styling similar to Step 2 Contact Details */
+
+.section-header {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+.error {
+  color: red;
+  font-size: 12px;
+  margin-top: 3px;
+}
+
+/* Icon container adjustments */
+.input-icon-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-box.with-icon {
+  padding-right: 36px; /* to leave space for icon */
+  position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  top: 50%;
+  right: 12px;
+  transform: translateY(-50%);
+  width: 16px;
+  height: 16px;
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.calendar-icon {
+  width: 18px;
+  height: 16px;
+}
+
+.dropdown-icon {
+  width: 14px;
+  height: 8px;
+  filter: grayscale(100%) brightness(0) sepia(1) hue-rotate(180deg) saturate(300%) contrast(0.8);
+}
+
+
+.input-icon calendar-icon{
+  color: #145360;
+}
+
+
+
+
+/* === Mobile Responsive for iOS & Android (≤ 480px) === */
+@media (max-width: 480px) {
+  .step-one-fields-with-image {
+    padding: 16px;
+    border-radius: 10px;
+  }
+
+  .step1-top-row {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    max-width: 100%;
+    padding: 0 10px;
+  }
+
+  .profile-upload-section {
+    width: 100%;
+    align-items: center;
+  }
+
+  .profile-upload-label,
+  .upload-btn {
+    width: 100px;
+    height: 100px;
+  }
+
+  
+  .upload-placeholder {
+    font-size: 12px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .input-box.with-icon {
+    padding-right: 32px;
+  }
+
+  .input-icon {
+    width: 14px;
+    height: 14px;
+    right: 10px;
+  }
+
+  .section-header {
+    font-size: 16px;
+    text-align: center;
+  }
+
+  .upload-btn {
+    width: 50%;
+    font-size: 14px;
+    width: 100px;
+    height: 50px;
+  }
+}

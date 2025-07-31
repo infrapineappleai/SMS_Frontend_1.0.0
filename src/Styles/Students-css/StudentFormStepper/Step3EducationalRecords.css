@@ -1,0 +1,455 @@
+.step-three-fields {
+  padding: 10px;
+}
+
+.form-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.status-btn {
+  padding: 8px 16px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.status-btn.active {
+  background-color: #1F6978;
+  color: white;
+}
+
+.status-btn.inactive {
+  background-color: #ccc;
+  color: black;
+}
+
+.form-row {
+  display: flex;
+  gap: 60px;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.input-icon-container {
+  position: relative;
+}
+
+.input-box.with-icon {
+  padding-right: 40px;
+}
+
+.input-icon.dropdown-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  width: 14px;
+  height: 8px;
+}
+
+/* Assign button */
+.assign-btn {
+  display: block;
+  width: 100%;
+  max-width: 904px;
+  height: 46px;
+  margin: 10px auto;
+  background-color: #ffffff;
+  color: #1F6978;
+  border: 3px solid #1F6978;
+  border-radius: 5px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+  text-align: center;
+  line-height: 46px;
+}
+
+/* 
+.assign-btn:hover {
+  background-color: #15545f;
+}*/
+
+/* Table wrapper background to match header */
+.assigned-table-wrapper {
+  max-height: 200px; /* adjust height as needed */
+  overflow-y: auto;
+  background-color: #D3D3D31A 10%; /* matches header */
+  padding: 0 10px;
+}
+
+
+
+
+
+/* Header style */
+.assigned-table thead th {
+  background-color: #D3D3D31A;
+  text-align: center;
+  padding: 15px 12px;
+  font-weight: 600;
+}
+
+
+
+.assigned-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 12px; /* 12px gap between rows */
+  font-size: 14px;
+}
+
+/* Apply background color to rows similar to header */
+.assigned-table tbody tr {
+  background-color: white;
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    transition: border 0.2s ease;
+
+}
+
+
+.assigned-table tr.selected {
+  border: 2px solid #FFD700; /* yellow border */
+  box-shadow: 0 0 0 2px #FFD700;
+}
+
+
+
+
+/* ✅ Selected row with yellow border */
+.assigned-table tbody tr.selected {
+  border: 2px solid #FFD700;
+  box-shadow: 0 0 0 2px #FFD700;
+}
+
+
+
+.assigned-table th,
+.assigned-table td {
+  padding: 15px 12px;
+  vertical-align: middle;
+  border: none;
+}
+
+.assigned-table th {
+  background-color: #D3D3D31A;
+  font-weight: 600;
+}
+
+/* Column Alignments */
+.assigned-table th.course-col,
+.assigned-table td.course-col {
+  width: 40%;
+  text-align: left;
+  padding-left: 20px;
+}
+
+.assigned-table th.grade-col,
+.assigned-table td.grade-col {
+ width: 20%;
+  text-align: center;
+  padding-left: 10px;
+  padding-right: 10px;}
+
+.assigned-table th.actions-col,
+.assigned-table td.actions-col {
+  width: 40%;
+  text-align: right;
+  padding-right: 20px;
+}
+
+/* Actions */
+.table-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+  align-items: center;
+}
+
+.action-icon {
+  width: 18px;
+  height: 18px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-size: 18px;
+  padding: 0;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+  display: flex;
+  line-height: 1;
+}
+
+.edit-icon:hover {
+  color: #1F6978;
+  background-color: #e0f2f1;
+}
+
+.delete-icon:hover {
+  color: red;
+  background-color: #ffebee;
+}
+
+/* Toast notifications */
+.toast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  min-width: 250px;
+  padding: 12px 16px;
+  border-radius: 5px;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 9999;
+  animation: slideIn 0.3s ease forwards;
+}
+
+.toast-success {
+  background-color: #4CAF50;
+}
+
+.toast-error {
+  background-color: #F44336;
+}
+
+.toast-delete {
+  background-color: #9C27B0;
+}
+
+.toast-icon img {
+  width: 24px;
+  height: 24px;
+  margin-right: 10px;
+}
+
+.toast-content {
+  flex-grow: 1;
+}
+
+.toast-title {
+  font-weight: 600;
+  display: block;
+}
+
+.toast-message {
+  font-size: 14px;
+}
+
+.toast-close {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+}
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+
+
+
+
+
+.icon-btn {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+}
+
+
+
+
+
+
+
+
+
+
+/* 
+@media (max-width: 768px) {
+  .step-three-fields {
+    padding: 8px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .input-box.with-icon {
+    padding-right: 35px;
+    font-size: 14px;
+  }
+
+  .input-icon.dropdown-icon {
+    right: 8px;
+    width: 12px;
+    height: 7px;
+  }
+
+  .assign-btn {
+    width: 100%;
+    font-size: 14px;
+    height: 42px;
+    line-height: 42px;
+    max-width: 100%;
+  }
+
+  .assigned-table-wrapper {
+    max-height: 250px;
+    overflow-x: auto;
+    padding: 0 5px;
+  }
+
+  .assigned-table th, .assigned-table td {
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  .assigned-table th.course-col,
+  .assigned-table td.course-col,
+  .assigned-table th.grade-col,
+  .assigned-table td.grade-col,
+  .assigned-table th.actions-col,
+  .assigned-table td.actions-col {
+    padding-left: 1px;
+    padding-right: 10px;
+    text-align: left;
+  }
+
+  .table-actions {
+    justify-content: flex-start;
+    gap: 6px;
+  }
+
+  .icon-btn {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+
+  .toast {
+    top: 10px;
+    right: 10px;
+    min-width: 200px;
+    padding: 10px 12px;
+  }
+
+  .toast-icon img {
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+  }
+
+  .toast-title {
+    font-size: 14px;
+  }
+
+  .toast-message {
+    font-size: 13px;
+  }
+} */
+
+
+
+
+@media (max-width: 768px) {
+  /* Proper mobile layout with clear separation of columns */
+
+  .assigned-table-wrapper {
+    padding: 0 5px;
+    overflow-x: auto;
+    max-height: none;
+  }
+
+  .assigned-table {
+    width: 100%;
+    table-layout: auto;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+  }
+
+  .assigned-table th,
+  .assigned-table td {
+    padding: 12px 8px;
+    font-size: 13px;
+    white-space: nowrap;
+    vertical-align: middle;
+  }
+
+  .assigned-table th.course-col,
+  .assigned-table td.course-col {
+    width: 40%;
+    text-align: left;
+    padding-left: 10px;
+  }
+
+  .assigned-table th.grade-col,
+  .assigned-table td.grade-col {
+    width: 20%;
+    text-align: center;
+  }
+
+  .assigned-table th.actions-col,
+  .assigned-table td.actions-col {
+    width: 40%;
+    text-align: right;
+    padding-right: 10px;
+  }
+
+  .table-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 6px;
+    align-items: center;
+  }
+
+  .icon-btn {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+  }
+
+  .assign-btn {
+    width: 90%;
+    margin: 15px auto 10px auto;
+    height: 42px;
+    font-size: 14px;
+    line-height: 42px;
+    display: block;
+  }
+}

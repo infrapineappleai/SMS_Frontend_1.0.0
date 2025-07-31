@@ -1,0 +1,189 @@
+/* Payment Success Modal Overlay */
+.payment-success-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  backdrop-filter: blur(5px);
+}
+
+/* Payment Success Modal Content */
+.payment-success-modal-content {
+  background: white;
+  border-radius: 16px;
+  padding: 40px 30px;
+  text-align: center;
+  position: relative;
+  max-width: 400px;
+  width: 90%;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: successModalSlideIn 0.3s ease-out;
+}
+
+@keyframes successModalSlideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.8) translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Success Icon */
+.payment-success-icon {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+  animation: successIconPop 0.6s ease-out 0.2s both;
+}
+
+@keyframes successIconPop {
+  0% {
+    opacity: 0;
+    transform: scale(0.3);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Success Title */
+.payment-success-title {
+  font-size: 24px;
+  font-weight: 600;
+  color: #2c3e50;
+  margin: 0 0 32px 0;
+  animation: successTextSlide 0.5s ease-out 0.4s both;
+}
+
+@keyframes successTextSlide {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Generate Receipt Button */
+.generate-receipt-btn {
+  background: linear-gradient(135deg, #1F6978);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 14px 32px;
+  font-size: 16px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(44, 82, 130, 0.3);
+  animation: successButtonSlide 0.5s ease-out 0.6s both;
+  width: 100%;
+  max-width: 200px;
+}
+
+@keyframes successButtonSlide {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.generate-receipt-btn:hover {
+  background: linear-gradient(135deg,#1F6978);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(44, 82, 130, 0.4);
+}
+
+.generate-receipt-btn:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 8px rgba(44, 82, 130, 0.3);
+}
+
+/* Close Button */
+.close-success-modal-btn {
+  position: absolute;
+  top: 15px;
+  right: 20px;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #718096;
+  cursor: pointer;
+  padding: 5px;
+  line-height: 1;
+  transition: all 0.2s ease;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-success-modal-btn:hover {
+  background-color: #f7fafc;
+  color: #4a5568;
+  transform: rotate(90deg);
+}
+
+.close-success-modal-btn:active {
+  background-color: #edf2f7;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .payment-success-modal-content {
+    padding: 30px 20px;
+    margin: 20px;
+  }
+  
+  .payment-success-title {
+    font-size: 20px;
+    margin-bottom: 24px;
+  }
+  
+  .generate-receipt-btn {
+    padding: 12px 24px;
+    font-size: 14px;
+  }
+  
+  .payment-success-icon svg {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+/* Additional hover effects for better UX */
+.payment-success-modal-content:hover {
+  box-shadow: 0 25px 70px rgba(0, 0, 0, 0.2);
+}
+
+/* Focus states for accessibility */
+.generate-receipt-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(44, 82, 130, 0.3);
+}
+
+.close-success-modal-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(49, 130, 206, 0.4);
+}

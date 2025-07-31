@@ -1,0 +1,409 @@
+.course-catalog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.course-catalog-modal {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 800px;
+  height: auto;
+  min-height: 400px;
+  box-sizing: border-box;
+  transition: width 0.3s ease, height 0.3s ease;
+}
+
+.course-catalog-modal.expanded {
+  width: 800px;
+  height: 685px;
+}
+
+.course-catalog-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.close-btn img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  margin: 0;
+}
+
+.form-group {
+  margin-bottom: 15px;
+  background-color: white;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 14px;
+  color: black;
+  font-family: 'Montserrat', sans-serif;
+  background-color: white;
+}
+
+/* Style for all inputs and select */
+.form-group input,
+.form-group select {
+  width: 100%;
+  height: 40px;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 14px;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  background-color: #fff;
+}
+
+/* Target Fees and Course Record inputs specifically */
+.form-group input[name="fees"],
+.form-group input[name="courseRecord"] {
+  width: 360px; /* Match the width of Fees field */
+  height: 40px; /* Match the height of Fees field */
+}
+
+/* Remove blue focus outline and set a custom focus style */
+.form-group input:focus,
+.form-group select:focus {
+  outline: none;
+  border-color: #1F6978;
+  box-shadow: 0 0 5px rgba(31, 105, 120, 0.3);
+  background-color: #fff;
+}
+
+.form-group input:hover,
+.form-group select:hover {
+  border-color: #1F6978; /* Same border color as focus for consistency */
+  box-shadow: 0 0 3px rgba(31, 105, 120, 0.2); /* Lighter shadow for hover */
+  background-color: #fff; /* Maintain white background */
+}
+
+/* Ensure placeholder doesn’t trigger blue background */
+.form-group input::placeholder,
+.form-group select::placeholder {
+  color: #999999;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: transparent;
+}
+
+/* Override autofill background */
+.form-group input:-webkit-autofill,
+.form-group input:-webkit-autofill:hover,
+.form-group input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1000px #fff inset;
+  -webkit-text-fill-color: #333;
+}
+
+.form-row {
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  background-color: white;
+}
+
+.form-group {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+}
+
+.button-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: white;
+  color: #1F6978;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  border: #1F6978 3px solid;
+  font-weight: bold;
+  width: calc(100% - 10px);
+  margin-left: 10px;
+}
+
+.added-courses {
+  margin-top: 20px;
+}
+
+.courses-table {
+  width: 100%;
+  border: 2px solid #1F6978;
+  margin-top: 10px;
+  border-radius: 20px;
+  overflow: hidden;
+  display: block;
+  overflow-x: auto;
+  width: calc(100% - 10px);
+  margin-left: 10px;
+}
+
+.courses-table th,
+.courses-table td {
+  padding: 1px;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.courses-table th {
+  background-color: #FFFFFF;
+}
+
+.courses-table td {
+  background-color: #D3D3D31A;
+  padding: 5px;
+  margin-right: 0;
+}
+
+.courses-table th:nth-child(1) {
+  padding-left: 30px;
+}
+
+.courses-table td:nth-child(1) {
+  padding-left: 30px;
+}
+
+.courses-table td:nth-child(2) {
+  padding-left: 165px;
+}
+
+.courses-table th:nth-child(2) {
+  padding-left: 140px;
+}
+
+.courses-table th:nth-child(3) {
+  padding-left: 170px;
+}
+
+.courses-table td:nth-child(3) {
+  padding-left: 160px;
+}
+
+.courses-table td:nth-child(4) {
+  padding-left: 165px;
+}
+
+.courses-table th:nth-child(4) {
+  padding-left: 150px;
+}
+
+.courses-table tr {
+  display: table-row;
+  width: 100%;
+  border-bottom: 1px solid #ddd;
+}
+
+.courses-table tr:last-child {
+  border-bottom: none;
+}
+
+.action-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  margin-right: 0;
+}
+
+.action-btn img {
+  width: 20px;
+  height: 20px;
+  object-fit: contain;
+  vertical-align: middle;
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 10px;
+  background-color: #1F6978;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 30px;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  width: calc(100% - 10px);
+  margin-left: 10px;
+}
+
+h3 {
+  padding-left: 10px;
+  font-size: 18px;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  margin-bottom: 15px;
+}
+
+.courses-table tbody {
+  display: block;
+  overflow-x: auto;
+  min-width: 70%;
+  width: max-content;
+  max-height: 100px;
+}
+
+/* Responsive Section */
+@media (max-width: 768px) {
+  .course-catalog-modal {
+    width: 90%;
+    padding: 15px;
+    min-height: 400px;
+    border-radius: 15px;
+  }
+
+  .course-catalog-modal.expanded {
+    width: 95%;
+    min-height: 860px;
+    border-radius: 15px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .form-group {
+    width: 100%;
+  }
+
+  .form-group select {
+    width: 100%;
+    height: 10px;
+  }
+
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+  }
+
+  /* Target Fees and Course Record inputs specifically for mobile */
+  .form-group input[name="fees"],
+  .form-group input[name="courseRecord"] {
+    width: 345px; /* Maintain fixed width on mobile */
+    height: 40px; /* Maintain fixed height on mobile */
+  }
+
+  .button-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-left: 0;
+    width: calc(100% - 10px);
+  }
+
+  .courses-table {
+    width: 100%;
+    font-size: 12px;
+    margin-left: 0;
+    width: calc(100% - 10px);
+  }
+
+  .courses-table td,
+  .courses-table th {
+    padding: 8px;
+    width: auto;
+  }
+
+  .courses-table th:nth-child(1) {
+    padding-left: 20px;
+  }
+
+  .courses-table td:nth-child(1) {
+    padding-left: 25px;
+  }
+
+  .courses-table td:nth-child(2) {
+    padding-left: 40px;
+  }
+
+  .courses-table th:nth-child(2) {
+    padding-left: 20px;
+  }
+
+  .courses-table th:nth-child(3) {
+    padding-left: 30px;
+  }
+
+  .courses-table td:nth-child(3) {
+    padding-left: 40px;
+  }
+
+  .courses-table td:nth-child(4) {
+    padding-left: 30px;
+  }
+
+  .courses-table th:nth-child(4) {
+    padding-left: 10px;
+  }
+
+  .action-btn {
+    margin-right: 0;
+  }
+
+  .action-btn img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .submit-btn {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    margin-left: 0;
+    width: calc(100% - 10px);
+  }
+
+  .close-btn {
+    width: 24px;
+    height: 24px;
+  }
+
+  h3 {
+    font-size: 16px;
+    padding-left: 5px;
+  }
+
+  .courses-table tbody {
+    display: block;
+    overflow-x: auto;
+    min-width: 70%;
+    width: max-content;
+    max-height: 100px;
+  }
+}

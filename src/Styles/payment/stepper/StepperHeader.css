@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.stepper-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin: 24px 0;
+  width: 100%;
+}
+
+.step-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  flex: 1;
+  color: #a0a0a0;
+  font-weight: 500;
+}
+
+.step-number {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e0e0e0;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 10px;
+  transition: background-color 0.3s;
+}
+
+.step-label {
+  font-size: 16px;
+}
+
+/* Active and Completed States */
+.step-item.active .step-number {
+  background-color: #1F6978;
+}
+
+.step-item.active .step-label {
+  color: #333;
+  font-weight: 500;
+}
+
+/* Active Underline */
+.active-step-underline {
+  position: absolute;
+  bottom: -25px;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background-color: #1F6978;
+  border-radius: 2px;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .stepper-header {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    margin: 16px 0;
+  }
+
+  .step-item {
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    gap: 10px;
+  }
+
+  .step-number {
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+
+  .step-label {
+    font-size: 14px;
+  }
+
+  .active-step-underline {
+    width: 4px;
+    height: 100%;
+    left: -10px;
+    bottom: 0;
+    border-radius: 2px;
+  }
+}

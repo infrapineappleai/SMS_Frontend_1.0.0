@@ -1,0 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+.step-container h4 {
+  font-size: 18px;
+  font-weight: 600;
+  margin-bottom: 24px;
+}
+
+.align-items-center {
+  align-items: center;
+  display: flex;
+}
+
+.icon-style {
+  width: 15px;
+  height: 15px;
+}
+
+.text {
+  margin-left: 10px;
+}
+
+.payment-student-details {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-top: 20px;
+}
+
+.payment-student-details span {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #333;
+  font-size: 16px;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.payment-student-details span strong {
+  color: #555;
+  font-weight: 600;
+  font-family: 'Montserrat', sans-serif;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+  .payment-student-details {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 15px;
+    gap: 10px;
+  }
+
+  .payment-student-details span {
+    font-size: 14px;
+  }
+
+  .step-container h4 {
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+
+  .icon-style {
+    width: 12px;
+    height: 12px;
+  }
+
+  .text {
+    margin-left: 8px;
+  }
+}

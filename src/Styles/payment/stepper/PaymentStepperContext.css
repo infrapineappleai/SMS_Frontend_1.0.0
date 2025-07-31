@@ -1,0 +1,105 @@
+/* Import Montserrat font */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap');
+
+/* Stepper Container */
+.stepper-container {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Stepper */
+.stepper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Step */
+.step {
+  width: 60px;
+  height: 60px;
+  background-color: #9e9e9e;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-family: Montserrat, sans-serif;
+  font-weight: 600;
+  font-size: 18px;
+  margin: 0 50px;
+  transition: all 0.3s ease;
+  position: relative;
+  z-index: 2;
+}
+
+.step.active {
+  background-color: #1F6978;
+}
+
+.step.completed {
+  background-color: #1F6978;
+}
+
+/* Step Circle (for number display) */
+.step-circle {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.step-number {
+  font-size: 18px;
+  font-weight: 600;
+}
+
+/* Step connector line */
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 10px);
+  width: 80px;
+  height: 3px;
+  background-color: #e0e0e0;
+  transform: translateY(-50%);
+  z-index: 1;
+}
+
+.step.active::after,
+.step.completed::after {
+  background-color: #1F6978;
+}
+
+/* Step Labels */
+.step-labels {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+}
+
+.step-label {
+  font-family: Montserrat, sans-serif;
+  font-size: 14px;
+  color: #9e9e9e;
+  font-weight: 500;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.step-label.active-label {
+  color: #1F6978;
+  font-weight: 600;
+}
+
+.step-label.completed-label {
+  color: #1F6978;
+  font-weight: 600;
+}

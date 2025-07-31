@@ -1,0 +1,130 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+ 
+.sidebar {
+  width: 275px;
+  height: 100vh;
+  position: fixed;
+  left: 0;
+  background: rgba(211, 211, 211, 0.15); 
+  padding: 05px 30px 30px 30px;
+  
+  
+}
+
+.sidebar-close-btn {
+  text-align: right;
+  padding: 10px;
+  font-size: 24px;
+  cursor: pointer;
+  color: #333;
+}
+
+
+/* ✅ Add to Sidebar.css */
+.sidebar-close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+
+.logo-img {
+  width: 81px;
+  height: 121px;
+  margin: 5px auto;
+  margin-bottom: 60px;
+  display: block;
+  }
+
+.menu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  margin: 12px 21px 13px 21px ;
+  
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  gap: 19px;
+  padding: 11px 35px;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #000000;
+  font-size: 16px;
+  font-weight: 500;
+  font-family: 'Montserrat';
+  width: 100%;
+  cursor: pointer;
+  
+  
+  
+}
+
+.menu-item span {
+  font-family: 'Montserrat';
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1;
+  
+}
+
+.Sidebar-icon {
+  width: 24px;
+  height: 24px;
+  filter: brightness(0) saturate(100%) invert(26%) sepia(17%) 
+          saturate(1350%) hue-rotate(150deg) brightness(90%) contrast(91%);
+  transition: filter 0.3s ease;
+}
+
+.menu-item:hover,
+.menu-item.active {
+  background-color: #1F6978;
+}
+
+.menu-item:hover span,
+.menu-item.active span {
+  color: #ffffff;
+}
+
+.menu-item:hover .Sidebar-icon,
+.menu-item.active .Sidebar-icon {
+  filter: brightness(0) invert(1);
+}
+
+.dashboard-icon { width: 18px; height: 18.75px; margin-top: 2px; margin-left: 3px; }
+.student-icon { width: 20.7px; height: 18.43px; margin-top: 2.57px; margin-left: 1.65px; }
+.course-icon { width: 16px; height: 20.52px; margin-top: 2px; margin-left: 4px; }
+.payment-icon { width: 20px; height: 20px; margin-top: 2.2px; margin-left: 2px; }
+.exam-icon { width: 16px; height: 20px; margin-top: 2.2px; margin-left: 4px; }
+.schedule-icon { width: 18.08px; height: 18px; margin-top: 2.2px; margin-left: 4px; }
+.report-icon { width: 16px; height: 20px; margin-top: 2px; margin-left: 4px; }
+.settings-icon { width: 20.97px; height: 20.97px; margin-top: 1.51px; margin-left: 1.51px; }
+.logout-icon { width: 16.83px; height: 18px; margin-top: 3px; margin-left: 4px; }
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 275px;
+  }
+  .menu-item {
+    font-size: 14px;
+  }
+}
+@media (max-width: 768px) {
+  .sidebar {
+    width: 275px;
+    padding: 20px;
+  }
+
+  .menu-item {
+    font-size: 14px;
+    padding: 10px 20px;
+  }
+}

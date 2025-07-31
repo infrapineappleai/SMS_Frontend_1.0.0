@@ -1,0 +1,266 @@
+/* Receipt Modal Styles */
+.receipt-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 20px;
+  font-family: 'Poppins', Arial, sans-serif; /* A font that closely matches the design */
+}
+
+.receipt-modal {
+  background: #ffffff;
+  border-radius: 16px;
+  max-width: 450px;
+  width: 100%;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* This is key to making the top-header's corners rounded */
+  max-height: 95vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Top Header (Green Section) */
+.receipt-top-header {
+  background-color: #e6edea;
+  padding: 20px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start; /* Aligns items to the start */
+  gap: 20px;
+}
+
+.header-logo-container .logo {
+  width: 50px;
+  height: auto;
+}
+
+.header-title-container {
+  text-align: left;
+}
+
+.academy-name {
+  font-size: 28px;
+  font-weight: 700;
+  color: #2c5f5f;
+  margin: 0;
+}
+
+.academy-subtitle {
+  font-size: 14px;
+  color: #daa520; /* A gold color that matches */
+  margin: -5px 0 0 0;
+  font-weight: 500;
+}
+
+/* Main White Content Body */
+.receipt-content-body {
+  padding: 20px 30px 30px 30px;
+  overflow-y: auto;
+}
+
+.receipt-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.receipt-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #2c5f5f;
+  margin: 0;
+}
+
+.receipt-date {
+  font-size: 14px;
+  color: #2c5f5f;
+  margin: 0;
+}
+
+/* Payment Details Section */
+.payment-details {
+  background: #ffffff;
+  border: 1px solid #f0f0f0;
+  border-radius: 8px;
+  padding: 20px;
+}
+
+.payment-details-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 15px 0;
+  color: #333;
+}
+
+.detail-row, .total-amount-row {
+  display: grid;
+  grid-template-columns: 120px 15px 1fr; /* Label | Colon | Value */
+  gap: 5px;
+  align-items: start;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.detail-label {
+  font-weight: 500;
+  color: #555;
+}
+
+.detail-colon {
+  text-align: center;
+  color: #555;
+}
+
+.detail-value {
+  font-weight: 500;
+  color: #333;
+  word-break: break-word;
+}
+
+/* Total Amount Styling */
+.total-amount-row {
+  font-weight: 700;
+  padding-top: 15px;
+  border-top: 1px solid #e0e0e0;
+  margin-top: 15px;
+}
+
+.total-amount-row .detail-label,
+.total-amount-row .detail-colon,
+.total-amount-row .detail-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: #000000;
+}
+
+.location-row {
+  display: flex;
+  justify-content: flex-start;
+  font-size: 14px;
+  font-weight: 500;
+  color: #333;
+  margin-top: -5px; /* Adjust to align under the total value */
+  padding-right: 5px; /* Align with value text */
+}
+
+/* Footer Section */
+.receipt-footer {
+  text-align: center;
+  margin-top: 25px;
+}
+
+.receipt-note {
+  color: #d9534f; /* Red color for the note */
+  font-size: 13px;
+  margin: 0 0 15px 0;
+}
+
+.thank-you {
+  color: #2c5f5f;
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0 0 25px 0;
+}
+
+.btn-whatsapp {
+  background: #2c5f5f;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.btn-whatsapp:hover {
+  background: #1e4242;
+  transform: translateY(-2px);
+}
+
+.whatsapp-icon {
+  display: inline-block;
+  transform: rotate(-45deg) translateY(1px); /* Simple icon simulation */
+}
+
+.btn-pdf,
+.btn-skip {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  transition: background-color 0.3s, color 0.3s;
+  text-align: center;
+}
+
+.btn-pdf {
+  background-color: #1F6978; /* Green color for PDF button */
+  color: white;
+}
+
+.btn-pdf:hover {
+  background-color: #1F6978; /* Darker green on hover */
+}
+
+.btn-skip {
+  background-color: #6c757d; /* Gray color for Skip button */
+  color: white;
+}
+
+.btn-skip:hover {
+  background-color: #5a6268; /* Darker gray on hover */
+}
+
+/* Ensure buttons are centered in the footer */
+.receipt-footer {
+  text-align: center;
+}
+
+/* Optional: Add some spacing if needed */
+.receipt-footer button {
+  margin: 0 40px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+  .receipt-modal-overlay {
+    padding: 10px;
+  }
+  
+  .receipt-modal {
+    border-radius: 12px;
+  }
+  
+  .receipt-top-header {
+    padding: 15px 20px;
+    gap: 15px;
+  }
+  
+  .academy-name {
+    font-size: 24px;
+  }
+
+  .receipt-content-body {
+    padding: 15px 20px 25px 20px;
+  }
+  
+  .detail-row, .total-amount-row {
+    grid-template-columns: 100px 15px 1fr; /* Adjust column width for smaller screens */
+  }
+}

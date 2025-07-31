@@ -1,0 +1,640 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600&display=swap');
+
+.table-container {
+  padding: 10px;
+  background-color: white;
+  width: 101.5%;
+  margin-top: -3%;
+  margin-left: -6px;
+  position: relative;
+}
+
+.table-container1 {
+  padding: 10px;
+  background-color: #D3D3D31A;
+  width: 101.5%;
+  margin-top: 0%;
+  margin-left: -6px;
+  position: relative;
+}
+
+.table-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 30px 20px 30px;
+}
+
+.search-container {
+  display: flex;
+  align-items: center;
+  background: #ffffff;
+  border-radius: 5px;
+  width: 300px;
+  max-width: 100%;
+  height: 46px;
+
+}
+
+.search-input {
+  width: 100%;
+  height: 46px;
+  padding: 10px 10px 10px 40px;
+  border: 1px solid #1F6978;
+  border-radius: 5px;
+  font-size: 14px;
+  font-family: 'Montserrat';
+  color: #C4C4C4;
+  padding-left: 1px;
+}
+
+.search-icon {
+  position: absolute;
+  right: 21px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  pointer-events: none;
+}
+
+.add-btn {
+  width: 210px;
+  height: 46px;
+  border-radius: 5px;
+  background-color: #1F6978;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-family: 'Montserrat';
+  font-weight: 700;
+  padding: 13px 40px;
+  display: flex;
+  align-items: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background: transparent;
+}
+
+.dropdown {
+  position: absolute;
+  background: white;
+  border: 1px solid #1F6978;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  margin-top: 5px;
+  width: 290px;
+  height: 202px;
+}
+
+.dropdown1 {
+  position: absolute;
+  background: white;
+  border: 1px solid #1F6978;
+  border-radius: 4px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  margin-top: 5px;
+  width: 230px;
+  height: 127px;
+}
+
+.dropdown-item {
+  padding: 8px 12px;
+  cursor: pointer;
+  font-weight: lighter;
+}
+
+.dropdown-item:hover {
+  background-color: #1F69781A;
+}
+
+th {
+  text-align: left;
+  color: black;
+  position: relative;
+  padding-left: 20px;
+}
+
+th:first-child {
+  text-align: left;
+  padding-left: 20px;
+}
+
+th:last-child {
+  text-align: right;
+  padding-right: 55px;
+}
+
+td {
+  padding: 10px;
+  text-align: left;
+  background-color: white;
+  padding-left: 22px;
+}
+
+td:last-child {
+  text-align: right;
+  vertical-align: middle;
+  padding-right: 20px;
+}
+
+th:nth-child(3) {
+  padding-left: 60px;
+}
+
+th:nth-child(2) {
+  padding-left: 60px;
+}
+
+td:nth-child(3) {
+  padding-left: 60px;
+}
+
+td:nth-child(2) {
+  padding-left: 60px;
+}
+
+.filter-icon {
+  margin-left: 10px;
+  width: 11px;
+  height: 11px;
+  vertical-align: middle;
+  cursor: pointer;
+}
+
+.course-details-popup {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-content {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 935px;
+  height: 430px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.popup-content h3 {
+  margin: 0 0 15px 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  color: black;
+  padding-left: 10px;
+}
+
+.popup-content form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-content label {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  color: #333;
+}
+
+.update-button {
+  background-color: #1F6978;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  margin-top: 40px;
+  width: calc(100% - 10px);
+  margin-left: 10px;
+}
+
+.update-button:hover {
+  background-color: #165a67;
+}
+
+.update-button1 {
+  background-color: #1F6978;
+  color: white;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 500;
+  margin-top: 130px;
+  width: calc(100% - 10px);
+  margin-left: 10px;
+}
+
+.update-button1:hover {
+  background-color: #165a67;
+}
+
+.form-row {
+  display: flex;
+  gap: 10px;
+}
+
+
+/* Target the Fees input specifically to match Grade */
+.popup-content input[name="fees"] {
+  width: 350px;
+  /* Desired width */
+  height: 40px;
+  /* Desired height */
+  padding: 8px 12px;
+  /* Consistent padding */
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  box-sizing: border-box;
+  /* Include padding and border in width/height */
+}
+
+/* Adjust form-group to respect fixed width */
+.form-group {
+  flex: 0 0 auto;
+  /* Prevent stretching */
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding-left: 10px;
+  width: 320px;
+  /* Match the input width */
+}
+
+/* Override for Fees input specifically */
+.popup-content .form-group input[name="fees"] {
+  width: 428px;
+  /* Enforce fixed width */
+  height: 40px;
+  box-sizing: border-box;
+}
+
+
+/* Style for select options (limited browser support) */
+.form-group select option {
+  background-color: #fff; /* Default background */
+  padding: 5px; /* Add padding for better hover visibility */
+  text-align: left; /* Align text as per image */
+  border-color: #1F6978 1px solid; /* Match border color */
+}
+
+.form-group select option:hover {
+  background-color: #25759d; /* Light gray background on hover */
+  color: #1F6978; /* Teal text for contrast */
+}
+
+/* Ensure placeholder styling */
+.form-group select::placeholder {
+  color: #999;
+  font-size: 14px;
+  font-family: 'Montserrat', sans-serif;
+  background-color: transparent;
+  text-align: left;
+}
+
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 20px;
+  height: 20px;
+  cursor: pointer;
+}
+
+.popup-content p {
+  margin: 10px 0;
+}
+
+.course-details-popup1 {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2000;
+}
+
+.popup-content1 {
+  background: white;
+  padding: 20px;
+  border-radius: 20px;
+  width: 877px;
+  height: 427px;
+  position: relative;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+  padding-left: 40px;
+}
+
+p {
+  display: flex;
+  align-items: baseline;
+}
+
+p strong {
+  margin-right: 55px;
+}
+
+p1 {
+  display: flex;
+  align-items: baseline;
+}
+
+p1 strong {
+  margin-right: 100px;
+  font-weight: bold;
+}
+
+p1 strong+* {
+  font-weight: bold;
+}
+
+.details-table {
+  border-collapse: separate;
+  border-spacing: 0;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.details-table th:nth-child(1),
+.details-table td:nth-child(1) {
+  padding-left: 0px;
+}
+
+.details-table td:nth-child(2) {
+  padding-left: 120px;
+}
+
+.details-table th:nth-child(2) {
+  padding-left: 120px;
+}
+
+.details-table th:nth-child(3),
+.details-table td:nth-child(3) {
+  padding-left: 20px;
+}
+
+.details-table td:nth-child(4) {
+  padding-right: 20px;
+}
+
+.details-table th:nth-child(4) {
+  padding-right: 25px;
+}
+
+.details-table th {
+  background-color: #fff;
+}
+
+.details-table td {
+  background-color: #D3D3D31A;
+  padding: auto;
+}
+
+/* Scrollable table body */
+.scrollable-tbody {
+  max-height: 200px;
+  overflow-y: auto;
+  display: block;
+}
+
+/* Style for the body table */
+.scrollable-tbody table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+/* Table body cell styles */
+.scrollable-tbody td {
+  background-color: #D3D3D31A;
+  padding: 10px;
+  text-align: left;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Ensure action column aligns properly */
+.scrollable-tbody td.action-icons1 {
+  text-align: right;
+  vertical-align: middle;
+  padding-right: 20px;
+}
+
+/* Scrollbar styling */
+.scrollable-tbody::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollable-tbody::-webkit-scrollbar-thumb {
+  background-color: #1F6978;
+  border-radius: 4px;
+}
+
+.scrollable-tbody::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+
+  .table-container,
+  .table-container1 {
+    width: 100%;
+    margin-left: 0;
+    margin-top: 0;
+    padding: 5px;
+  }
+
+  .table-header {
+    flex-direction: column;
+    padding: 0 10px 10px 10px;
+    gap: 10px;
+  }
+
+  .search-container {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  .search-input {
+    width: 100%;
+    height: 40px;
+    font-size: 14px;
+    padding-left: 40px;
+  }
+
+  .search-icon {
+    right: 10px;
+  }
+
+  .add-btn {
+    width: 100%;
+    margin-right: 0;
+    padding: 10px;
+    font-size: 14px;
+  }
+
+  table {
+    border-spacing: 0 5px;
+  }
+
+  th,
+  td {
+    padding: 8px;
+    font-size: 12px;
+  }
+
+  th:first-child,
+  td:first-child {
+    padding-left: 10px;
+  }
+
+  th:last-child,
+  td:last-child {
+    padding-right: 10px;
+  }
+
+  th:nth-child(2),
+  th:nth-child(3),
+  td:nth-child(2),
+  td:nth-child(3) {
+    padding-left: 10px;
+  }
+
+  .dropdown,
+  .dropdown1 {
+    width: 100px;
+    height: auto;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+
+  .dropdown-item {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+
+  .course-details-popup,
+  .course-details-popup1 {
+    padding: 10px;
+  }
+
+  .popup-content,
+  .popup-content1 {
+    width: 90%;
+    height: auto;
+    padding: 15px;
+    padding-left: 20px;
+  }
+
+  .popup-content h3,
+  .popup-content1 h3 {
+    font-size: 16px;
+    padding-left: 5px;
+  }
+
+  .popup-content input,
+  .popup-content select,
+  .popup-content1 input,
+  .popup-content1 select {
+    height: 40px;
+    font-size: 12px;
+  }
+
+  .update-button {
+    padding: 8px;
+    font-size: 14px;
+  }
+
+  .form-row {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .form-group {
+    width: 100%;
+    padding-left: 0;
+  }
+
+  p strong {
+    margin-right: 10px;
+  }
+
+  p1 strong {
+    margin-right: 60px;
+  }
+
+  .details-table {
+    margin-top: 10px;
+  }
+
+  .details-table th,
+  .details-table td {
+    padding: 10px;
+    font-size: 12px;
+  }
+
+  .details-table td:nth-child(2),
+  .details-table th:nth-child(2) {
+    padding-left: 30px;
+  }
+
+  .details-table td:nth-child(3),
+  .details-table th:nth-child(3) {
+    padding-left: 30px;
+  }
+
+  .details-table td:nth-child(4),
+  .details-table th:nth-child(4) {
+    padding-right: 10px;
+  }
+
+  .scrollable-tbody {
+    max-height: 150px;
+  }
+
+  .scrollable-tbody td {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .popup-content {
+    padding: 10px;
+  }
+
+  .popup-content input[name="fees"] {
+    width: 100% !important;
+    max-width: 380px !important;
+    height: 40px !important;
+    box-sizing: border-box !important;
+}
+}

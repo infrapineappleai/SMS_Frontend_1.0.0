@@ -1,0 +1,267 @@
+/* Modal Overlay */
+.payment-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+/* Modal Content */
+.payment-modal-content {
+  background: white;
+  border-radius: 8px;
+  max-width: 800px;
+  width: 90%;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+  border: 2px solid #5ba7d6;
+}
+
+/* Modal Header */
+.payment-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 30px;
+  border-bottom: 1px solid #e5e5e5;
+  background-color: #f8f9fa;
+}
+
+.payment-modal-header h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.payment-close-button {
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.payment-close-button:hover {
+  color: #666;
+  background-color: #e9ecef;
+}
+
+/* Modal Body */
+.payment-modal-body {
+  padding: 25px 30px;
+}
+
+/* Student Info Section */
+.student-info-section {
+  margin-bottom: 25px;
+}
+
+.student-info-section p {
+  margin: 0;
+  font-size: 1rem;
+  color: #333;
+  font-weight: 400;
+}
+
+.student-info-section strong {
+  font-weight: 500;
+}
+
+/* Course Info Section */
+.course-info-section {
+  background-color: #f8f9fa;
+  border: 1px solid #1F6978;
+  border-radius: 15px;
+  padding: 12px 10px;
+  margin-bottom: 30px;
+  width: 436px; ;
+  height: 114px;
+  top: 252px;
+  left: 263px; ;
+}
+
+.course-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 8px;
+  /* border-bottom: 1px solid #e0e0e0; */
+  margin-bottom: 8px;
+}
+
+.course-header-title,
+.grade-header-title {
+  font-weight: 600;
+  color:black;
+  font-size: 0.95rem;
+}
+
+.course-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 6px 0;
+}
+
+.course-name,
+.course-grade {
+  color: black;
+  font-size: 0.9rem;
+}
+
+/* Payment History Section */
+.payment-history-section {
+  padding: 10px;
+  overflow-x: auto;
+  background-color: #D3D3D31A;
+  width: 101.5%;
+  margin-top: -3%;
+  margin-left: -6px;
+  position: relative;
+}
+
+.payment-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 10px;
+  background: transparent;
+}
+
+.payment-table th {
+  color: black;
+  background-color: #f2f2f2;
+  height: 50px;
+  padding: 12px 10px;
+  text-align: center;
+  vertical-align: middle;
+  font-weight: 600;
+}
+
+.payment-table td {
+  background-color: white;
+  height: 60px;
+  padding: 12px 10px;
+  text-align: center;
+  vertical-align: middle;
+  color: #333;
+}
+
+/* Status Styling */
+.payment-status {
+  padding: 8px 16px;
+  border-radius: 5px;
+  display: inline-block;
+  width: 88px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+  white-space: nowrap;
+}
+
+.payment-status.paid {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.payment-status.pending {
+  background-color: #F44336;
+  color: white;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .payment-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .payment-modal-header {
+    padding: 15px 20px;
+  }
+  
+  .payment-modal-body {
+    padding: 20px;
+  }
+  
+  .payment-modal-header h2 {
+    font-size: 1.2rem;
+  }
+  
+  .course-info-section {
+    padding: 12px 15px;
+  }
+  
+  .payment-history-section {
+    padding: 8px;
+  }
+  
+  .payment-table th,
+  .payment-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .payment-modal-content {
+    width: 98%;
+  }
+  
+  .payment-modal-header {
+    padding: 12px 15px;
+  }
+  
+  .payment-modal-body {
+    padding: 15px;
+  }
+  
+  .payment-modal-header h2 {
+    font-size: 1.1rem;
+  }
+  
+  .course-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 5px;
+  }
+  
+  .course-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3px;
+  }
+  
+  .payment-history-section {
+    padding: 5px;
+  }
+  
+  .payment-table th,
+  .payment-table td {
+    padding: 6px;
+    font-size: 0.8rem;
+  }
+  
+  .payment-status {
+    font-size: 12px;
+    padding: 6px 12px;
+    width: 70px;
+  }
+}
+
+

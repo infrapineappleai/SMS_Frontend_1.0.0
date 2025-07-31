@@ -1,0 +1,346 @@
+/* Stylesheet: SummaryPopup.css - Safe unique class names to avoid conflicts */
+
+.summary-modal {
+  width: 800px;
+  max-height: 90vh;
+  margin: auto;
+  background-color: #ffffff;
+  border-radius: 12px;
+  padding: 20px;
+  overflow: auto;
+  position: relative;
+}
+
+.modal-overlay {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.summary-container.scrollable {
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 10px 20px 40px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  z-index: 1001;
+}
+
+.close-btn img {
+  width: 20px;
+  height: 20px;
+}
+
+.summary-header-bg {
+  text-align: center;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.summary-header {
+  height: 80px;
+  background-color: #1f6978;
+  border-radius: 12px 12px 0 0;
+}
+
+.profile-pic-round {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin-top: -40px;
+  border: 3px solid #ffffff;
+  object-fit: cover;
+}
+
+.summary-section {
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 0; /* prevent left/right padding from restricting width */}
+
+.summary-section h3 {
+  font-size: 18px;
+  color: #1f6978;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 16px;
+  margin-bottom: 15px;
+}
+
+.info-2col {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.info-block {
+  flex: 1 1 45%;
+  background-color: #f9f9f9;
+  padding: 12px 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.info-label {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 6px;
+  color: #333;
+}
+
+.info-label .icon {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+}
+
+.info-value {
+  font-size: 14px;
+  color: #444;
+}
+
+.scrollable-section {
+  overflow-x: auto;
+    width: 100%;
+  padding: 0; /* remove any padding if it causes inner gap */
+  margin: 0;
+}
+
+.scroll-table {
+  width: 100%;
+  max-height: 180px; /* vertical scroll if needed */
+  overflow-y: auto;
+  overflow-x: auto; /* horizontal scroll */
+  border-radius: 8px;
+    box-shadow: inset 0 0 4px rgba(0, 0, 0, 0.05);
+
+}
+
+.scroll-table table {
+min-width: 100%; /* ensures table spans full scrollable area */
+  width: 100%; /* takes full container width */
+  border-collapse: collapse;
+  table-layout: fixed; /* ensures consistent cell sizing */
+}
+
+.scroll-table th,
+.scroll-table td {
+  text-align: left;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+    white-space: nowrap; /* prevent wrapping, helps scrolling */
+
+}
+
+.scroll-table th {
+  background-color: #e9f1f2;
+  color: #000000;
+  font-size: 14px;
+}
+
+.scroll-table td {
+  font-size: 13px;
+}
+
+.summary-buttons {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.prev-btn,
+.save-btn {
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 14px;
+  transition: 0.3s;
+}
+
+.prev-btn {
+  background-color: #ccc;
+  color: #333;
+}
+
+.prev-btn:hover {
+  background-color: #bbb;
+}
+
+.save-btn {
+  background-color: #1f6978;
+  color: white;
+}
+
+.save-btn:hover {
+  background-color: #14515e;
+}
+
+
+/* Mobile Responsive for SummaryPopup - iOS & Android phones */
+
+/* Smaller mobile phones (320px - 480px width) */
+@media (max-width: 480px) {
+  .summary-modal {
+    width: 95vw;
+    max-height: 90vh;
+    padding: 15px 12px;
+    border-radius: 8px;
+  }
+
+  .profile-pic-round {
+    width: 60px;
+    height: 60px;
+    margin-top: -30px;
+    border-width: 2px;
+  }
+
+  .summary-header h2 {
+    font-size: 18px;
+  }
+
+  .summary-section h3 {
+    font-size: 16px;
+    padding-bottom: 12px;
+    margin-bottom: 12px;
+  }
+
+  .info-2col {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .info-block {
+    flex: 1 1 100%;
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+
+  .info-label {
+    font-size: 13px;
+  }
+
+  .info-label .icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 6px;
+  }
+
+  .info-value {
+    font-size: 13px;
+  }
+
+  .scroll-table {
+    max-height: 140px;
+  }
+
+  .scroll-table th,
+  .scroll-table td {
+    padding: 8px 6px;
+    font-size: 12px;
+  }
+
+  .summary-buttons {
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .prev-btn,
+  .save-btn {
+    width: 100%;
+    font-size: 14px;
+    padding: 12px 0;
+  }
+}
+
+/* Medium phones/tablets in portrait (481px - 768px width) */
+@media (min-width: 481px) and (max-width: 768px) {
+  .summary-modal {
+    width: 90vw;
+    max-height: 90vh;
+    padding: 18px 16px;
+    border-radius: 10px;
+  }
+
+  .profile-pic-round {
+    width: 70px;
+    height: 70px;
+    margin-top: -35px;
+    border-width: 3px;
+  }
+
+  .summary-header h2 {
+    font-size: 20px;
+  }
+
+  .summary-section h3 {
+    font-size: 17px;
+  }
+
+  .info-2col {
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .info-block {
+    flex: 1 1 48%;
+    padding: 12px 14px;
+  }
+
+  .info-label {
+    font-size: 14px;
+  }
+
+  .info-label .icon {
+    width: 17px;
+    height: 17px;
+  }
+
+  .info-value {
+    font-size: 14px;
+  }
+
+  .scroll-table {
+    max-height: 160px;
+  }
+
+  .scroll-table th,
+  .scroll-table td {
+    font-size: 13px;
+  }
+
+  .summary-buttons {
+    justify-content: center;
+    gap: 16px;
+  }
+
+  .prev-btn,
+  .save-btn {
+    font-size: 15px;
+    padding: 12px 20px;
+  }
+}
+
+/* Landscape phones */
+@media (max-height: 480px) and (orientation: landscape) {
+  .summary-modal {
+    max-height: 85vh;
+  }
+
+  .scroll-table {
+    max-height: 120px;
+  }
+}

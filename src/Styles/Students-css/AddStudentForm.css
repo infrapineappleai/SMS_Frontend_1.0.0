@@ -1,0 +1,241 @@
+/* AddStudentForm.css */
+/* Fix modal overlay position and size */
+.student-modal-overlay-stepper {
+  top: 21px !important;     /* updated from 48px */
+  left: 228px !important;   /* updated from 239px */
+  max-width: 984px !important;  /* updated from 964px */
+  max-height: 989px !important; /* updated from 150px */
+  overflow: visible !important; /* allow overflow for modal content */
+}
+
+
+
+
+.student-modal {
+  position: relative !important;
+  width: 984px !important;
+  height: 989px !important;
+  border-radius: 20px !important;
+  background-color: #fff !important;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  overflow-y: auto;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.form-group textarea {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-family: inherit;  /* make font consistent */
+  width: 100%;           /* fill container width */
+  box-sizing: border-box; /* include padding in width */
+  resize: vertical;       /* allow vertical resizing */
+  min-height: 80px;       /* optional, for initial height */
+}
+.form-group input {
+  padding: 10px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+/* Make modal content scrollable inside */
+.modal-content-wrapper {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  padding-right: 10px;
+}
+
+/* Optional: style scrollbars for better UX */
+.modal-content-wrapper::-webkit-scrollbar {
+  width: 8px;
+}
+.modal-content-wrapper::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+}
+
+/* Modal actions fixed at bottom */
+.modal-actions {
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+/* Buttons share common styles */
+.btn-previous, .btn-next {
+  flex: 1; /* grow equally */
+  max-width: 427px; /* optional max width */
+  height: 46px;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Previous button aligned left */
+.btn-previous {
+  background-color: #ffffff;
+  color: #1f6978;
+  border: 1px solid #1f6978;
+  margin-right: 10px; /* spacing between buttons */
+}
+.btn-previous:hover {
+  background-color: #f0f0f0;
+}
+
+/* Next button aligned right */
+.btn-next {
+  background-color: #1f6978;
+  color: #ffffff;
+  border: none;
+}
+.btn-next:hover {
+  background-color: #14505d;
+}
+
+/* Modal footer styles (if used elsewhere) */
+.student-modal-stepper .modal-footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 16px 24px;
+  border-top: 1px solid #e0e0e0;
+  position: sticky;
+  bottom: 0;
+  background: #fff;
+  z-index: 10;
+}
+.student-modal-stepper .modal-footer .btn {
+  min-width: 120px;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-size: 1rem;
+}
+.student-modal-stepper .modal-footer .btn.btn-primary {
+  background-color: #1F6978;
+  color: #fff;
+  border: none;
+}
+.student-modal-stepper .modal-footer .btn.btn-secondary {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+}
+
+/* Other necessary styles remain unchanged */
+
+.close-icon {
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin-left: auto; /* push it to the right */
+  margin-top: -50px;
+}
+
+  
+.modal-header {
+  display: flex;
+  justify-content: space-between; /* push content left and right */
+  align-items: center;            /* vertical center */
+  padding: 0px 0px 10px 0px;  /* padding around */
+  position: relative;             /* if needed */
+}
+
+
+
+
+
+
+
+/* Mobile Responsive for AddStudentForm (iOS/Android) */
+
+@media (max-width: 480px) {
+  /* Modal overlay covers most of screen on mobile */
+  .student-modal-overlay-stepper {
+    top: 10px !important;
+    left: 5px !important;
+    max-width: calc(100vw - 10px) !important;
+    max-height: calc(100vh - 20px) !important;
+    overflow: auto !important;
+  }
+
+  /* Modal container full width and height for mobile */
+  .student-modal {
+    width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    padding: 15px !important;
+  }
+
+  /* Modal header */
+  .modal-header {
+    padding: 10px 0 !important;
+  }
+
+  /* Close icon smaller and repositioned */
+  .close-icon {
+    width: 20px !important;
+    height: 20px !important;
+    margin-top: 0 !important;
+  }
+
+  /* Buttons full width stacked vertically */
+  .modal-actions {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .btn-previous, .btn-next {
+    max-width: 100% !important;
+    width: 100% !important;
+    height: 44px !important;
+    font-size: 15px !important;
+  }
+
+  /* Scrollable content padding reduced */
+  .modal-content-wrapper {
+    padding-right: 5px !important;
+  }
+
+  /* Adjust form-group inputs and textarea font size */
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px !important;
+    padding: 12px !important;
+  }
+
+  /* Table responsiveness */
+  .scroll-table table {
+    font-size: 14px !important;
+  }
+
+  /* Fix overflow on scrollable sections */
+  .scrollable-section {
+    overflow-x: auto !important;
+  }
+}

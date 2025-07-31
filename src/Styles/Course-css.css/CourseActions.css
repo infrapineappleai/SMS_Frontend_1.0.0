@@ -1,0 +1,37 @@
+.action-icons,
+.action-icons1 {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+  align-items: center;
+  padding-right: 2px;
+}
+
+.action-icon {
+  width: 24px;
+  height: 24px;
+  vertical-align: middle;
+  cursor: pointer;
+  transition: transform 0.1s, opacity 0.1s;
+}
+
+.action-icon:active {
+  transform: scale(0.95);
+  opacity: 0.7;
+}
+
+.action-icon:hover {
+  opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+  .action-icons,
+  .action-icons1 {
+    gap: 5px;
+  }
+
+  .action-icon {
+    width: 11px;
+    height: 11px;
+  }
+}
