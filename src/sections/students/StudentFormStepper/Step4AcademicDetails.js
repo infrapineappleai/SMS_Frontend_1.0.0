@@ -5,6 +5,7 @@ import { useToast } from '../../../modals/ToastProvider';
 import { getDropdownOptions } from '../../../integration/studentAPI';
 import EditIcon from '../../../assets/icons/Edit.png';
 import DeleteIcon from '../../../assets/icons/Delete.png';
+import successToastIcon from '../../../assets/icons/Success.png';
 
 const Step4AcademicDetails = ({ formData, onChange, errors }) => {
   const { showToast } = useToast();
@@ -125,7 +126,7 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
         grade: formData.grade || '',
       }],
     });
-    showToast({ title: 'Success', message: 'Schedule assigned successfully!' });
+    showToast({ title: 'Success', message: 'Schedule assigned successfully!',icon: successToastIcon });
     setScheduleInput((prev) => ({ ...prev, schedule_day: '', schedule_time: '' }));
   };
 
@@ -151,7 +152,7 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
       ...formData,
       schedules: updated,
     });
-    showToast({ title: 'Deleted', message: 'Schedule deleted successfully!', isError: false });
+    showToast({ title: 'Deleted', message: 'Schedule deleted successfully!', isError: false,icon: successToastIcon });
   };
 
   const availableDays = [...new Set(

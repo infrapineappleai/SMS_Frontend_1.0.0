@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:5000/api';
+const API_BASE_URL = 'https://pineappleai.cloud/api/sms/api';
 const API_URL = `${API_BASE_URL}/schedule/`;
 
 // Format time to backend standard (HH:MM:SS)

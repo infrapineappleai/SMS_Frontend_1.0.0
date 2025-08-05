@@ -3,6 +3,8 @@ import StudentsList from './StudentsList';
 import AddStudentForm from './StudentFormStepper/AddStudentForm';
 import { getAllStudents, deleteStudent } from '../integration/studentAPI';
 import { useToast } from '../modals/ToastProvider';
+import successToastIcon from '../../assets/icons/Success.png';
+import errorToasticon from '../../assets/icons/error.png';
 
 const StudentsPage = () => {
   const [students, setStudents] = useState([]);
@@ -34,6 +36,7 @@ const StudentsPage = () => {
           title: 'Error',
           message: `Failed to load students: ${e.message}`,
           isError: true,
+          icon:errorToasticon
         });
         setStudents([]);
         setFilteredStudents([]);
@@ -168,6 +171,7 @@ useEffect(() => {
     showToast({
       title: 'Success',
       message: 'Student saved successfully!',
+      icon:successToastIcon
     });
   };
 
@@ -193,12 +197,14 @@ useEffect(() => {
         title: 'Success',
         message: 'Student deleted successfully!',
         isDelete: true,
+        icon:successToastIcon
       });
     } catch (error) {
       showToast({
         title: 'Error',
         message: `Failed to delete student: ${error.message}`,
         isError: true,
+        icon:errorToasticon
       });
     }
   };

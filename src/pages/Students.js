@@ -51,16 +51,16 @@ const Students = () => {
   }, [showToast]);
 
 //Auto refre
-  useEffect(() => {
-  const intervalId = setInterval(async () => {
-    const newStudents = await getAllStudents();
+//   useEffect(() => {
+//   const intervalId = setInterval(async () => {
+//     const newStudents = await getAllStudents();
 
-    if (JSON.stringify(newStudents) !== JSON.stringify(students)) {
-      setStudents(newStudents);
-    }
-  }, 1500);
-  return () => clearInterval(intervalId);
-}, [students]);
+//     if (JSON.stringify(newStudents) !== JSON.stringify(students)) {
+//       setStudents(newStudents);
+//     }
+//   }, 15000);
+//   return () => clearInterval(intervalId);
+// }, [students]);
 
   useEffect(() => {
     fetchDropdownOptions();

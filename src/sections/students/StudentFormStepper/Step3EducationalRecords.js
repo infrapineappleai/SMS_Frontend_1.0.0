@@ -5,6 +5,8 @@ import { useToast } from '../../../modals/ToastProvider';
 import { getDropdownOptions } from '../../../integration/studentAPI';
 import EditIcon from '../../../assets/icons/Edit.png';
 import DeleteIcon from '../../../assets/icons/Delete.png';
+import successToastIcon from '../../../assets/icons/Success.png';
+import ToggleSwitch from '../../../Components/ToggleSwitch';
 
 const Step3EducationalRecords = ({ formData, onChange, errors }) => {
   const { showToast } = useToast();
@@ -13,6 +15,7 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
   const [dropdownOptions, setDropdownOptions] = useState({ courses: [], grades: [] });
   const [loadingCourses, setLoadingCourses] = useState(false);
   const [loadingGrades, setLoadingGrades] = useState(false);
+  const isActive = formData.status === 'Active';
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -44,7 +47,7 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
         const grades = await getDropdownOptions('grades', { courseId: courseIdInput });
         setDropdownOptions((prev) => ({ ...prev, grades: Array.isArray(grades) ? grades : [] }));
         if (!grades.length) {
-          showToast({ title: 'Warning', message: `No grades available for selected course.`, isError: true });
+          showToast({ title: 'Warning', message: 'No grades available for selected course.', isError: true });
         }
       } catch (error) {
         showToast({ title: 'Error', message: `Failed to load grades: ${error.message || 'Unknown error'}`, isError: true });
@@ -55,6 +58,13 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
     };
     fetchGrades();
   }, [courseIdInput, showToast]);
+
+  const toggleStatus = () => {
+    onChange({
+      ...formData,
+      status: isActive ? 'Inactive' : 'Active',
+    });
+  };
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -98,27 +108,27 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
       assignedCourses: [...(formData.assignedCourses || []), newCourse],
     });
 
-    showToast({ title: 'Success', message: 'Course and grade assigned successfully!' });
+    showToast({ title: 'Success', message: 'Course and grade assigned successfully!',icon: successToastIcon});
     setCourseIdInput('');
     setGradeIdInput('');
   };
 
-const handleEditCourse = (id) => {
-  const courseToEdit = formData.assignedCourses.find((item) => item.id === id);
-  if (courseToEdit && courseToEdit.course_id && courseToEdit.grade_id) {
-    setCourseIdInput(String(courseToEdit.course_id));
-    setGradeIdInput(String(courseToEdit.grade_id));
-    const updatedCourses = formData.assignedCourses.filter((item) => item.id !== id);
-    onChange({
-      ...formData,
-      course: String(courseToEdit.course_id),
-      grade: String(courseToEdit.grade_id),
-      assignedCourses: updatedCourses,
-    });
-  } else {
-    showToast({ title: 'Error', message: 'Cannot edit: Missing course or grade ID', isError: true });
-  }
-};
+  const handleEditCourse = (id) => {
+    const courseToEdit = formData.assignedCourses.find((item) => item.id === id);
+    if (courseToEdit && courseToEdit.course_id && courseToEdit.grade_id) {
+      setCourseIdInput(String(courseToEdit.course_id));
+      setGradeIdInput(String(courseToEdit.grade_id));
+      const updatedCourses = formData.assignedCourses.filter((item) => item.id !== id);
+      onChange({
+        ...formData,
+        course: String(courseToEdit.course_id),
+        grade: String(courseToEdit.grade_id),
+        assignedCourses: updatedCourses,
+      });
+    } else {
+      showToast({ title: 'Error', message: 'Cannot edit: Missing course or grade ID', isError: true });
+    }
+  };
 
   const handleDeleteCourse = (id) => {
     const updatedCourses = formData.assignedCourses.filter((item) => item.id !== id);
@@ -130,12 +140,16 @@ const handleEditCourse = (id) => {
       assignedCourses: updatedCourses,
     });
 
-    showToast({ title: 'Deleted', message: 'Course entry removed successfully', isError: false });
+    showToast({ title: 'Deleted', message: 'Course entry removed successfully', isError: false,icon: successToastIcon });
   };
 
   return (
     <div className="step-three-fields">
-      <h3 className="section-header">Educational Records</h3>
+      <div className="form-header-row">
+        <h3 className="section-header">Educational Records</h3>
+        <ToggleSwitch isActive={isActive} onToggle={toggleStatus} />
+      </div>
+
       <div className="form-row">
         <div className="form-group">
           <label className="input-label">Course</label>
@@ -180,6 +194,7 @@ const handleEditCourse = (id) => {
           {errors.grade && <span className="error">{errors.grade}</span>}
         </div>
       </div>
+
       <button
         type="button"
         className="assign-btn"
@@ -188,7 +203,9 @@ const handleEditCourse = (id) => {
       >
         Assign Course
       </button>
+
       {errors.assignedCourses && <p className="error-msg">{errors.assignedCourses}</p>}
+
       {formData.assignedCourses?.length > 0 ? (
         <div className="assigned-table-wrapper">
           <table className="assigned-table">

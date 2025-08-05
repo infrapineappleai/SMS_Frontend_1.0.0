@@ -34,14 +34,14 @@ const StudentProfilePopup = ({
 
   if (!isOpen || !studentData) return null;
 
-  const getFullImageUrl = (url) => {
-    if (!url) return "/default-avatar.png";
-    if (url.startsWith("http") || url.startsWith("data:image/")) return url;
-    return `http://localhost:5000/uploads/${url.replace(/^\/?uploads\//i, "")}`;
-  };
+  // const getFullImageUrl = (url) => {
+  //   if (!url) return "/default-avatar.png";
+  //   if (url.startsWith("http") || url.startsWith("data:image/")) return url;
+  //   return `https://pineappleai.cloud${url.replace(/^\/?Uploads\//i, "")}`;
+  // };
 
-  const profileImageUrl = getFullImageUrl(studentData.photo_url);
-  console.log("Profile Image URL:", profileImageUrl);
+  // const profileImageUrl = getFullImageUrl(studentData.photo_url);
+  // console.log("Profile Image URL:", profileImageUrl);
 
   const assignedCourses = Array.isArray(studentData.assignedCourses) ? studentData.assignedCourses : [];
   const schedules = Array.isArray(studentData.schedules) ? studentData.schedules : [];
@@ -62,7 +62,7 @@ const StudentProfilePopup = ({
       <div className="summary-header-bg">
         <div className="summary-header"></div>
         <img
-          src={profileImageUrl}
+          src={studentData.photo_url}
           alt="Profile"
           className="profile-pic-round"
           onError={(e) => {
