@@ -6,8 +6,9 @@ import Delete from "../../assets/icons/Delete.png";
 import { useToast } from "../../modals/ToastProvider";
 import AddStudentForm from "../students/AddStudentForm";
 import DeleteConfirmModal from "../../modals/DeleteConfirmModal";
-
-const baseImageUrl = "http://localhost:5000/uploads/";
+import successToastIcon from '../../assets/icons/Success.png';
+import errorToastIcon from '../../assets/icons/error.png';
+const baseImageUrl = "https://pineappleai.cloud/uploads/";
 
 const isValidImageUrl = (url) => {
   if (!url || typeof url !== "string") return false;
@@ -96,6 +97,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
         title: "Error",
         message: "No student selected for deletion",
         isError: true,
+        icon:errorToastIcon
       });
       setIsDeleteModalOpen(false);
       setStudentToDelete(null);
@@ -107,6 +109,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
       showToast({
         title: "Success",
         message: "Student deleted successfully!",
+        icon:successToastIcon
       });
       if (onDeleteStudent) {
         onDeleteStudent(studentToDelete);
@@ -117,6 +120,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
         title: "Error",
         message: err.message || "Failed to delete student",
         isError: true,
+        icon:errorToastIcon
       });
     } finally {
       setIsDeleteModalOpen(false);

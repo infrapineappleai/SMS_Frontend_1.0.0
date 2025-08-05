@@ -1,4 +1,3 @@
-// src/Components/ToggleSwitch.js
 import React from 'react';
 import '../Styles/ToggleSwitch.css';
 
@@ -22,7 +21,9 @@ const ToggleSwitch = ({ isActive, onToggle }) => {
             <div
               className="toggle-ball"
               style={{
-                transform: isActive ? 'translateX(19px)' : 'translateX(19px)',
+                transform: isActive
+                  ? window.innerWidth <= 600 ? 'translateX(22px)' : 'translateX(18px)'
+                  : 'translateX(2px)',
               }}
             />
           </div>

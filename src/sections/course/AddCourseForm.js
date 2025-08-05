@@ -190,8 +190,6 @@ const CourseCatalog = ({ onSubmit, onClose, initialCourse }) => {
       <tbody className="table-body">
         {courses.map((course, index) => (
           <tr key={index}>
-            <td>{course.courseId}</td>
-            <td>{course.courseName}</td>
             <td>{course.grade}</td>
             <td>{course.status}</td>
             <td>{course.fees}</td>
@@ -302,8 +300,6 @@ const CourseCatalog = ({ onSubmit, onClose, initialCourse }) => {
             <table className="courses-table">
               <thead>
                 <tr>
-                  <th>Course Code</th>
-                  <th>Course Name</th>
                   <th>Grade</th>
                   <th>Status</th>
                   <th>Fees(Rs)</th>

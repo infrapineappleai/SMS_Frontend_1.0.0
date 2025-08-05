@@ -7,6 +7,7 @@ import Step4AcademicDetails from "./StudentFormStepper/Step4AcademicDetails";
 import Step5Summary from "./StudentFormStepper/Step5Summary";
 import "../../Styles/Students-css/AddStudentForm.css";
 import closeIcon from "../../assets/icons/Close.png";
+import successToastIcon from '../../assets/icons/Success.png';
 import { useToast } from "../../modals/ToastProvider";
 import {
   createStudentWithOptionalPhoto,
@@ -85,6 +86,9 @@ useEffect(() => {
       grade: "",
       phn_num: initialData.phn_num || "",
       ice_contact: initialData.ice_contact || "",
+      status: initialData.status
+        ? initialData.status.charAt(0).toUpperCase() + initialData.status.slice(1).toLowerCase()
+        : "Active", 
       assignedCourses: Array.isArray(initialData.assignedCourses)
         ? initialData.assignedCourses.map((c, index) => ({
             ...c,
@@ -121,7 +125,7 @@ useEffect(() => {
           ]
         : [],
       photo_url: initialData.photo_url || "/default-avatar.png",
-      previewUrl: initialData.photo_url ? `http://localhost:5000${initialData.photo_url}` : null,
+      previewUrl: initialData.photo_url || null,
       resetKey: Date.now(),
     });
     setStep(1);
@@ -311,25 +315,26 @@ const handleSubmit = async () => {
       return;
     }
 
-    const payload = new FormData();
-    payload.append(
-      "user",
-      JSON.stringify({
-        name: formData.name,
-        first_name: formData.first_name,
-        last_name: formData.last_name,
-        username: formData.username || formData.last_name,
-        password: formData.password || "defaultpassword",
-        email: formData.email,
-        phn_num: formData.phn_num,
-        gender: formData.gender,
-        date_of_birth: new Date(formData.date_of_birth)
-          .toISOString()
-          .split("T")[0],
-        address: formData.address,
-        role: "student",
-      })
-    );
+const payload = new FormData();
+payload.append(
+  "user",
+  JSON.stringify({
+    name: formData.name,
+    first_name: formData.first_name,
+    last_name: formData.last_name,
+    username: formData.username || formData.last_name,
+    password: formData.password || "defaultpassword",
+    email: formData.email,
+    phn_num: formData.phn_num,
+    gender: formData.gender,
+    date_of_birth: new Date(formData.date_of_birth)
+      .toISOString()
+      .split("T")[0],
+    address: formData.address,
+    role: "student",
+    status: formData.status.toLowerCase(),  
+  })
+);
     payload.append(
       "student_details",
       JSON.stringify({
@@ -408,6 +413,7 @@ const handleSubmit = async () => {
     showToast({
       title: "Success",
       message: isEditMode ? "Student updated successfully!" : "Student created successfully!",
+      icon: successToastIcon
     });
     setShowSummary(false);
     setFormData({ ...getInitialFormData(), resetKey: Date.now() });

@@ -269,13 +269,13 @@ const CourseList = () => {
       setEditCourse(null);
     } catch (error) {
       console.error('Course Catalog Submit Error:', error);
-      setToast({
-        showToast: true,
-        isError: true,
-        title: 'Error',
-        message: error.response?.data?.error || error.message || 'Failed to save courses',
-        icon: deleteToastIcon,
-      });
+      // setToast({
+      //   showToast: true,
+      //   isError: true,
+      //   title: 'Error',
+      //   message: error.response?.data?.error || error.message || 'Failed to save courses',
+      //   icon: deleteToastIcon,
+      // });
       setTimeout(() => setToast((prev) => ({ ...prev, showToast: false })), 3000);
     }
   };
