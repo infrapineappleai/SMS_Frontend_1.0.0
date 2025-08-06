@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_BASE_URL = 'https://pineappleai.cloud/api/sms/api';
+const API_BASE_URL = 'https://aradanabeta.pineappleai.cloud/api/sms/api';
 
 const apiClient = axios.create({
   baseURL: API_BASE_URL,

@@ -6,7 +6,7 @@ import FrameIcon from '../../../assets/icons/Frame.png';
 import user from '../../../assets/icons/user_2_fill.png';
 import whatsapp from '../../../assets/icons/whatsapp_fill.png';
 
-const API_BASE_URL = "https://pineappleai.cloud/api/sms"; // Base URL for API and images
+const API_BASE_URL = "https://aradanabeta.pineappleai.cloud/api/sms"; // Base URL for API and images
 
 const Step1StudentsDetails = ({ onStudentSelect }) => {
   const [selectedStudentId, setSelectedStudentId] = useState(null);
