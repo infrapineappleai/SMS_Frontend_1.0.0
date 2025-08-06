@@ -10,7 +10,6 @@ import EmailIcon from '../../../assets/icons/Email.png';
 import PhoneIcon from '../../../assets/icons/Phone.png';
 import BranchIcon from '../../../assets/icons/Branch.png';
 import StudentIcon from '../../../assets/icons/Student.png';
-import ErrorIcon from '../../../assets/icons/error.png';
 import { useToast } from '../../../modals/ToastProvider';
 import AddStudentForm from '../AddStudentForm';
 
@@ -53,7 +52,6 @@ const Step5Summary = ({ isOpen, onClose, studentData, onSave, onEdit }) => {
         title: 'Validation Error',
         message: criticalErrors.student_no || 'Please fill required fields',
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }

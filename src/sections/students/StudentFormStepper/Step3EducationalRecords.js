@@ -5,7 +5,6 @@ import { useToast } from '../../../modals/ToastProvider';
 import { getDropdownOptions } from '../../../integration/studentAPI';
 import EditIcon from '../../../assets/icons/Edit.png';
 import DeleteIcon from '../../../assets/icons/Delete.png';
-import ErrorIcon from '../../../assets/icons/error.png';
 import successToastIcon from '../../../assets/icons/Success.png';
 import ToggleSwitch from '../../../Components/ToggleSwitch';
 
@@ -25,10 +24,10 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
         const courses = await getDropdownOptions('courses');
         setDropdownOptions((prev) => ({ ...prev, courses: Array.isArray(courses) ? courses : [] }));
         if (!courses.length) {
-          showToast({ title: 'Warning', message: 'No courses available.', isError: true, icon:ErrorIcon });
+          showToast({ title: 'Warning', message: 'No courses available.', isError: true });
         }
       } catch (error) {
-        showToast({ title: 'Error', message: `Failed to load courses: ${error.message || 'Unknown error'}`, isError: true,icon:ErrorIcon });
+        showToast({ title: 'Error', message: `Failed to load courses: ${error.message || 'Unknown error'}`, isError: true });
       } finally {
         setLoadingCourses(false);
       }
@@ -51,7 +50,7 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
           showToast({ title: 'Warning', message: 'No grades available for selected course.', isError: true });
         }
       } catch (error) {
-        showToast({ title: 'Error', message: `Failed to load grades: ${error.message || 'Unknown error'}`, isError: true ,icon:ErrorIcon});
+        showToast({ title: 'Error', message: `Failed to load grades: ${error.message || 'Unknown error'}`, isError: true });
         setDropdownOptions((prev) => ({ ...prev, grades: [] }));
       } finally {
         setLoadingGrades(false);
@@ -82,7 +81,7 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
   const handleAssignCourse = (e) => {
     e.preventDefault();
     if (!courseIdInput || !gradeIdInput) {
-      showToast({ title: 'Error', message: 'Please select both a course and a grade', isError: true,icon:ErrorIcon });
+      showToast({ title: 'Error', message: 'Please select both a course and a grade', isError: true });
       return;
     }
 
@@ -90,7 +89,7 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
     const selectedGrade = dropdownOptions.grades.find((g) => String(g.id) === String(gradeIdInput));
 
     if (!selectedCourse || !selectedGrade) {
-      showToast({ title: 'Error', message: 'Invalid course or grade selected', isError: true,icon:ErrorIcon });
+      showToast({ title: 'Error', message: 'Invalid course or grade selected', isError: true });
       return;
     }
 
@@ -127,7 +126,7 @@ const Step3EducationalRecords = ({ formData, onChange, errors }) => {
         assignedCourses: updatedCourses,
       });
     } else {
-      showToast({ title: 'Error', message: 'Cannot edit: Missing course or grade ID', isError: true ,icon:ErrorIcon});
+      showToast({ title: 'Error', message: 'Cannot edit: Missing course or grade ID', isError: true });
     }
   };
 

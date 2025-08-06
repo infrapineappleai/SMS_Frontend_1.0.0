@@ -17,7 +17,6 @@ import {
 import NextButton from "../../Components/Buttons/Next_button";
 import PreviousButton from "../../Components/Buttons/PreviousButton";
 import LongNextButton from "../../Components/Buttons/LongNextButton";
-import ErrorIcon from '../../assets/icons/error.png';
 
 const getInitialFormData = () => ({
   status: "Active",
@@ -178,7 +177,6 @@ useEffect(() => {
         title: "Validation Error",
         message: "Please fill all required fields",
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }
@@ -244,7 +242,6 @@ const handleSubmit = async () => {
         title: "Validation Error",
         message: "Please ensure all required fields are filled",
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }
@@ -258,7 +255,6 @@ const handleSubmit = async () => {
         title: "Validation Error",
         message: "Student number is required",
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }
@@ -276,7 +272,6 @@ const handleSubmit = async () => {
         title: "Validation Error",
         message: "Please select a valid branch",
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }
@@ -300,7 +295,6 @@ const handleSubmit = async () => {
         title: "Validation Error",
         message: "Please select valid courses and grades",
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }
@@ -317,7 +311,6 @@ const handleSubmit = async () => {
         title: "Validation Error",
         message: "Please select at least one valid schedule",
         isError: true,
-        icon:ErrorIcon
       });
       return;
     }
@@ -432,7 +425,6 @@ payload.append(
       title: "Error",
       message: `Failed to save student: ${error.message || "Unknown error"}`,
       isError: true,
-      icon:ErrorIcon
     });
   }
 };

@@ -6,7 +6,6 @@ import { getDropdownOptions } from '../../../integration/studentAPI';
 import EditIcon from '../../../assets/icons/Edit.png';
 import DeleteIcon from '../../../assets/icons/Delete.png';
 import successToastIcon from '../../../assets/icons/Success.png';
-import ErrorIcon from '../../../assets/icons/error.png';
 
 const Step4AcademicDetails = ({ formData, onChange, errors }) => {
   const { showToast } = useToast();
@@ -29,10 +28,10 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
         const branches = await getDropdownOptions('branches');
         setDropdownOptions((prev) => ({ ...prev, branches: Array.isArray(branches) ? branches : [] }));
         if (!branches.length) {
-          showToast({ title: 'Warning', message: 'No branches available.', isError: true,icon:ErrorIcon });
+          showToast({ title: 'Warning', message: 'No branches available.', isError: true });
         }
       } catch (error) {
-        showToast({ title: 'Error', message: `Failed to load branches: ${error.message || 'Unknown error'}`, isError: true,icon:ErrorIcon });
+        showToast({ title: 'Error', message: `Failed to load branches: ${error.message || 'Unknown error'}`, isError: true });
       } finally {
         setLoadingBranches(false);
       }
@@ -68,7 +67,7 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
           });
         }
       } catch (error) {
-        showToast({ title: 'Error', message: `Failed to load slots: ${error.message || 'Unknown error'}`, isError: true ,icon:ErrorIcon});
+        showToast({ title: 'Error', message: `Failed to load slots: ${error.message || 'Unknown error'}`, isError: true });
       } finally {
         setLoadingSlots(false);
       }
@@ -104,12 +103,12 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
     const { student_no } = formData; // get student_no from formData now
 
     if (!branch || !student_no || !schedule_day || !schedule_time) {
-      showToast({ title: 'Error', message: 'Branch, Student ID, Schedule Day, and Schedule Time are required', isError: true,icon:ErrorIcon });
+      showToast({ title: 'Error', message: 'Branch, Student ID, Schedule Day, and Schedule Time are required', isError: true });
       return;
     }
     const selectedSlot = filteredSlots.find((slot) => slot.day === schedule_day && slot.time === schedule_time);
     if (!selectedSlot) {
-      showToast({ title: 'Error', message: 'Invalid slot selected', isError: true,icon:ErrorIcon });
+      showToast({ title: 'Error', message: 'Invalid slot selected', isError: true });
       return;
     }
     onChange({
