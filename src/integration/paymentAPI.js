@@ -5,7 +5,7 @@ import Step3PaymentInfo from '../sections/payments/stepper/Step3PaymentInfo';
 import PaymentSuccessModal from './PaymentSuccessModal';
 import axios from 'axios';
 
-const API_BASE_URL = "https://pineappleai.cloud/api/sms/api";
+const API_BASE_URL = "https://aradanabeta.pineappleai.cloud/api/sms/api";
 
 const PaymentAPI = ({ isOpen, onClose, onPaymentSuccess }) => {
   const [currentStep, setCurrentStep] = useState(1);

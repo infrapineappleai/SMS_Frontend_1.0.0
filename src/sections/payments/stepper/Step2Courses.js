@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import '../../../Styles/payment/stepper/Step2Courses.css';
 
-const API_BASE_URL = "https://pineappleai.cloud/api/sms/api";
+const API_BASE_URL = "https://aradanabeta.pineappleai.cloud/api/sms/api";
 
 const Step2Courses = ({ student_no, student_details_id, feesData: propFeesData, onMonthSelect, selectedMonths: propSelectedMonths, onCourseSelect, currentCourse }) => {
   const [loading, setLoading] = useState(true);

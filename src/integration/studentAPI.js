@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const API_URL = 'https://pineappleai.cloud/api/sms/api';
-const IMAGE_BASE_URL = 'https://pineappleai.cloud';
+const API_URL = 'https://aradanabeta.pineappleai.cloud/api/sms/api';
+const IMAGE_BASE_URL = 'https://aradanabeta.pineappleai.cloud';
 
 export const getDropdownOptions = async (type, params = {}) => {
   try {
