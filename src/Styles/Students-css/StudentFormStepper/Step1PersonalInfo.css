@@ -119,12 +119,6 @@ select {
 }
 
 
-
-
-/* Form Rows */
-
-
-
 /* Inputs and Selects */
 input[type="text"],
 input[type="date"],
@@ -134,7 +128,7 @@ select {
   border: 1px solid #ccc;
   border-radius: 6px;
   font-family: 'Montserrat';
-  width: 100%;
+  width: 300px;
 }
 
 .input-icon-container {
@@ -326,6 +320,23 @@ select {
   color: #145360;
 }
 
+
+.radio-group {
+  display: flex;
+  gap: 20px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 14px;
+}
+
+.radio-label input[type="radio"] {
+  margin: 0;
+  cursor: pointer;
+}
 
 
 

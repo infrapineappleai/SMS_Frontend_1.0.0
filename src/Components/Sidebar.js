@@ -16,7 +16,7 @@ import ScheduleIcon from '../assets/icons/Schedule.png';
 
 const menuItems = [
   { name: 'Dashboard', icon: DashboardIcon, key: 'dashboard', path: '/dashboard' },
-  { name: 'Students', icon: StudentIcon, key: 'students', path: '/students' },
+  { name: 'Users', icon: StudentIcon, key: 'students', path: '/students' },
   { name: 'Course', icon: CourseIcon, key: 'course', path: '/course' },
   { name: 'Payment', icon: PaymentIcon, key: 'payment', path: '/payments' },
   { name: 'Schedule', icon: ScheduleIcon, key: 'schedule', path: '/schedule' },

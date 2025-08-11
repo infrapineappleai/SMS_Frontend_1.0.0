@@ -38,7 +38,7 @@ export const transformSlotToSchedule = (slot) => {
     startTime: start ? start.substring(0, 5).replace(':', '.') : 'N/A',
     endTime: end ? end.substring(0, 5).replace(':', '.') : 'N/A',
 
-    branch_id: slot.branch_id || 1
+    branch_id: slot.branch_id || 2
   };
 };
 
@@ -110,7 +110,7 @@ export const createSchedule = async (scheduleData) => {
     user_id: parseInt(scheduleData.user_id),
     grade_id: parseInt(scheduleData.grade_id),
     course_id: parseInt(scheduleData.course_id),
-    branch_id: scheduleData.branch_id || 1,
+    branch_id: scheduleData.branch_id || 2,
     days: scheduleData.days,
     start_time: toBackendTime(scheduleData.startTime),
     end_time: toBackendTime(scheduleData.endTime)
@@ -142,7 +142,7 @@ export const updateSchedule = async (slotId, scheduleData, originalData = {}) =>
     start_time: toBackendTime(scheduleData.startTime),
     end_time: toBackendTime(scheduleData.endTime),
     course_id: parseInt(scheduleData.course_id),
-    branch_id: scheduleData.branch_id || 1
+    branch_id: scheduleData.branch_id || 2
   };
 
   // Conditional update for user_id
@@ -224,5 +224,18 @@ export const fetchGrades = async () => {
   } catch (error) {
     const message = error.cause?.message || error.message;
     throw new Error(`Failed to fetch grades: ${message}`);
+  }
+};
+
+export const fetchBranches = async () => {
+  try {
+    const response = await fetchData(`${API_BASE_URL}/master/branches`);
+    if (!response.success) {
+      throw new Error(response.message || 'Failed to fetch branches');
+    }
+    return response.data;
+  } catch (error) {
+    const message = error.cause?.message || error.message;
+    throw new Error(`Failed to fetch branches: ${message}`);
   }
 };

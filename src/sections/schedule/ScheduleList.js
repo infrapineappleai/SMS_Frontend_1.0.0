@@ -28,7 +28,7 @@ function ScheduleList() {
   const [scheduleToDelete, setScheduleToDelete] = useState(null);
   const [schedule, setSchedule] = useState([]);
   const [targetDay, setTargetDay] = useState('');
-  const [selectedDay, setSelectedDay] = useState('');  // <-- new state for day filter
+  const [selectedDay, setSelectedDay] = useState('');
   const [loading, setLoading] = useState(true);
   const [showToast, setShowToast] = useState(false);
   const [isError, setIsError] = useState(false);
@@ -41,7 +41,7 @@ function ScheduleList() {
   const [lecturers, setLecturers] = useState([]);
   const [courses, setCourses] = useState([]);
   const [grades, setGrades] = useState([]);
-  const [applyFilter, setApplyFilter] = useState(true);  // keep day filtering enabled
+  const [applyFilter, setApplyFilter] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
 
   const daysOfWeek = [
@@ -139,7 +139,7 @@ function ScheduleList() {
 
   const handleSearch = (term) => {
     setSearchTerm(term);
-    if (term) setApplyFilter(true);
+   // if (term) setApplyFilter(true);
   };
 
   const handleAddBtnClick = () => {
@@ -185,6 +185,7 @@ function ScheduleList() {
 
   const handleOpenDeleteModal = (schedule) => {
     setScheduleToDelete(schedule);
+    setIsViewModalOpen(false);
     setIsDeleteModalOpen(true);
   };
 
@@ -208,6 +209,7 @@ function ScheduleList() {
       setShowToast(true);
       setIsDeleteModalOpen(false);
       setScheduleToDelete(null);
+      setIsViewModalOpen(true);
       setTimeout(() => setShowToast(false), 3000);
     } catch (error) {
       setToastData({
@@ -231,7 +233,7 @@ function ScheduleList() {
     setSelectedSchedule(null);
     setScheduleToDelete(null);
     setSchedulesToView([]);
-    setApplyFilter(true);
+    setApplyFilter(false);
   };
 
   const handleToastClose = () => {
@@ -334,8 +336,11 @@ function ScheduleList() {
                 ))
               ) : (
                 <tr>
-                  <td colSpan="6">
+                  {/* <td colSpan="6">
                     No schedules available for {targetDay || (new Date().getHours() < 18 ? 'today' : 'tomorrow')}.
+                  </td> */}
+                  <td colSpan="6">
+                     No schedules available
                   </td>
                 </tr>
               )}

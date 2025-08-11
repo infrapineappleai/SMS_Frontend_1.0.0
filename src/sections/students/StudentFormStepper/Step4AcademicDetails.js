@@ -5,7 +5,8 @@ import { useToast } from '../../../modals/ToastProvider';
 import { getDropdownOptions } from '../../../integration/studentAPI';
 import EditIcon from '../../../assets/icons/Edit.png';
 import DeleteIcon from '../../../assets/icons/Delete.png';
-import successToastIcon from '../../../assets/icons/Success.png';
+import successIcon from '../../../assets/icons/Success.png';
+import errorIcon from '../../../assets/icons/error.png';
 
 const Step4AcademicDetails = ({ formData, onChange, errors }) => {
   const { showToast } = useToast();
@@ -28,10 +29,10 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
         const branches = await getDropdownOptions('branches');
         setDropdownOptions((prev) => ({ ...prev, branches: Array.isArray(branches) ? branches : [] }));
         if (!branches.length) {
-          showToast({ title: 'Warning', message: 'No branches available.', isError: true });
+          showToast({ title: 'Warning', message: 'No branches available.', isError: true ,icon:errorIcon});
         }
       } catch (error) {
-        showToast({ title: 'Error', message: `Failed to load branches: ${error.message || 'Unknown error'}`, isError: true });
+        showToast({ title: 'Error', message: `Failed to load branches: ${error.message || 'Unknown error'}`, isError: true ,icon:errorIcon});
       } finally {
         setLoadingBranches(false);
       }
@@ -64,10 +65,11 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
             title: 'Warning',
             message: 'No available slots for selected branch, course, and grade.',
             isError: true,
+            icon:errorIcon
           });
         }
       } catch (error) {
-        showToast({ title: 'Error', message: `Failed to load slots: ${error.message || 'Unknown error'}`, isError: true });
+        showToast({ title: 'Error', message: `Failed to load slots: ${error.message || 'Unknown error'}`, isError: true,icon:errorIcon });
       } finally {
         setLoadingSlots(false);
       }
@@ -103,12 +105,12 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
     const { student_no } = formData; // get student_no from formData now
 
     if (!branch || !student_no || !schedule_day || !schedule_time) {
-      showToast({ title: 'Error', message: 'Branch, Student ID, Schedule Day, and Schedule Time are required', isError: true });
+      showToast({ title: 'Error', message: 'Branch, Student ID, Schedule Day, and Schedule Time are required', isError: true,icon:errorIcon });
       return;
     }
     const selectedSlot = filteredSlots.find((slot) => slot.day === schedule_day && slot.time === schedule_time);
     if (!selectedSlot) {
-      showToast({ title: 'Error', message: 'Invalid slot selected', isError: true });
+      showToast({ title: 'Error', message: 'Invalid slot selected', isError: true ,icon:errorIcon});
       return;
     }
     onChange({
@@ -126,7 +128,7 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
         grade: formData.grade || '',
       }],
     });
-    showToast({ title: 'Success', message: 'Schedule assigned successfully!',icon: successToastIcon });
+    showToast({ title: 'Success', message: 'Schedule assigned successfully!',icon:successIcon });
     setScheduleInput((prev) => ({ ...prev, schedule_day: '', schedule_time: '' }));
   };
 
@@ -152,7 +154,7 @@ const Step4AcademicDetails = ({ formData, onChange, errors }) => {
       ...formData,
       schedules: updated,
     });
-    showToast({ title: 'Deleted', message: 'Schedule deleted successfully!', isError: false,icon: successToastIcon });
+    showToast({ title: 'Deleted', message: 'Schedule deleted successfully!', isError: false,icon:errorIcon });
   };
 
   const availableDays = [...new Set(

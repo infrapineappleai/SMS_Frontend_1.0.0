@@ -85,6 +85,7 @@ td:nth-child(3) {
 
 .add-btn {
   white-space: nowrap;
+  margin: auto;
   padding: 13px 20px;
   font-size: 16px;
   font-weight: 700;
@@ -96,7 +97,7 @@ td:nth-child(3) {
   font-family: 'Montserrat';
   text-align: center;
   width: 170px;
-  min-height: 44px; /* Touch-friendly size */
+  min-height: 44px; 
 }
 
 .search-box {

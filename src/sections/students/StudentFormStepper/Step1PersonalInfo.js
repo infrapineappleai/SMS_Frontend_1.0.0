@@ -88,7 +88,7 @@ const Step1PersonalInfo = ({ formData, onChange, errors, onImageChange }) => {
             </div>
           </div>
 
-          {/* Second Row: DOB and Gender */}
+          {/* Second Row: DOB, Gender, and Role */}
           <div className="form-row">
             <div className="form-group dob-group">
               <label>Date of Birth</label>
@@ -122,6 +122,33 @@ const Step1PersonalInfo = ({ formData, onChange, errors, onImageChange }) => {
                 <img src={FilterIcon} alt="dropdown" className="input-icon dropdown-icon" />
               </div>
               {errors.gender && <span className="error">{errors.gender}</span>}
+            </div>
+
+            <div className="form-group">
+              <label>Role</label>
+              <div className="radio-group">
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="student"
+                    checked={formData.role === 'student'}
+                    onChange={handleInputChange}
+                  />
+                  Student
+                </label>
+                <label className="radio-label">
+                  <input
+                    type="radio"
+                    name="role"
+                    value="teacher"
+                    checked={formData.role === 'teacher'}
+                    onChange={handleInputChange}
+                  />
+                  Teacher
+                </label>
+              </div>
+              {errors.role && <span className="error">{errors.role}</span>}
             </div>
           </div>
         </div>

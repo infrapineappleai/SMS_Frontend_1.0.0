@@ -11,8 +11,6 @@ import WhatsAppIcon from "../../assets/icons/WhatsApp.png";
 import PhoneIcon from "../../assets/icons/Phone.png";
 import BranchIcon from "../../assets/icons/Branch.png";
 import StudentIcon from "../../assets/icons/Student.png";
-import { useToast } from "../../modals/ToastProvider";
-import { updateStudent } from "../../integration/studentAPI";
 
 const StudentProfilePopup = ({
   isOpen,
@@ -24,7 +22,6 @@ const StudentProfilePopup = ({
   onPrevious,
   mode = "profile",
 }) => {
-  const { showToast } = useToast();
   const [updatedData, setUpdatedData] = useState(studentData);
 
   useEffect(() => {
@@ -34,14 +31,14 @@ const StudentProfilePopup = ({
 
   if (!isOpen || !studentData) return null;
 
-  // const getFullImageUrl = (url) => {
-  //   if (!url) return "/default-avatar.png";
-  //   if (url.startsWith("http") || url.startsWith("data:image/")) return url;
-  //   return `https://aradanabeta.pineappleai.cloud${url.replace(/^\/?Uploads\//i, "")}`;
-  // };
+  const getFullImageUrl = (url) => {
+    if (!url) return "/default-avatar.png";
+    if (url.startsWith("http") || url.startsWith("data:image/")) return url;
+    return `http://localhost:5000/uploads/${url.replace(/^\/?uploads\//i, "")}`;
+  };
 
-  // const profileImageUrl = getFullImageUrl(studentData.photo_url);
-  // console.log("Profile Image URL:", profileImageUrl);
+  const profileImageUrl = getFullImageUrl(studentData.photo_url);
+  console.log("Profile Image URL:", profileImageUrl);
 
   const assignedCourses = Array.isArray(studentData.assignedCourses) ? studentData.assignedCourses : [];
   const schedules = Array.isArray(studentData.schedules) ? studentData.schedules : [];
@@ -62,7 +59,7 @@ const StudentProfilePopup = ({
       <div className="summary-header-bg">
         <div className="summary-header"></div>
         <img
-          src={studentData.photo_url}
+          src={profileImageUrl}
           alt="Profile"
           className="profile-pic-round"
           onError={(e) => {
