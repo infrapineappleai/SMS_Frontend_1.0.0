@@ -128,6 +128,9 @@
   box-shadow: 0 0 0 2px #FFD700;
 }
 
+
+
+
 /* ✅ Selected row with yellow border */
 .assigned-table tbody tr.selected {
   border: 2px solid #FFD700;
@@ -202,6 +205,28 @@
   background-color: #ffebee;
 }
 
+
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: translateX(0); }
+}
+
+.icon-btn {
+  width: 18px;
+  height: 18px;
+  margin-right: 8px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.icon-btn:hover {
+  transform: scale(1.2);
+}
+
+.action-icons {
+  display: flex;
+  align-items: center;
+}
 
 @media (max-width: 768px) {
   /* Proper mobile layout with clear separation of columns */

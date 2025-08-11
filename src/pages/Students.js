@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
+import { debounce } from 'lodash';
 import StudentsList from '../sections/students/StudentsList';
 import AddStudentForm from '../sections/students/AddStudentForm';
 import StudentDetailsPopup from '../sections/students/editStepper/StudentDetailsPopup';
@@ -9,6 +10,8 @@ import {
   getDropdownOptions,
 } from '../integration/studentAPI';
 import SearchIcon from '../assets/icons/searchButton.png';
+import successIcon from '../assets/icons/Success.png';
+import errorIcon from '../assets/icons/error.png';
 import '../pages/Students.css';
 
 const Students = () => {
@@ -32,7 +35,6 @@ const Students = () => {
       setCourses(courses);
     } catch (error) {
       console.error('Error fetching dropdown options:', error);
-      showToast({ title: 'Error', message: 'Failed to fetch dropdown options', isError: true });
     }
   }, [showToast]);
 
@@ -44,44 +46,44 @@ const Students = () => {
       setFilteredStudents(fetchedStudents);
     } catch (error) {
       console.error('Error fetching students:', error);
-      //showToast({ title: 'Error', message: error.message || 'Failed to fetch students', isError: true });
     } finally {
       setLoading(false);
     }
   }, [showToast]);
-
-//Auto refre
-//   useEffect(() => {
-//   const intervalId = setInterval(async () => {
-//     const newStudents = await getAllStudents();
-
-//     if (JSON.stringify(newStudents) !== JSON.stringify(students)) {
-//       setStudents(newStudents);
-//     }
-//   }, 15000);
-//   return () => clearInterval(intervalId);
-// }, [students]);
 
   useEffect(() => {
     fetchDropdownOptions();
     fetchStudents();
   }, [fetchDropdownOptions, fetchStudents]);
 
-  const handleSearch = useCallback(async () => {
-    if (!searchQuery.trim()) {
+  const handleSearch = useCallback(async (query) => {
+    console.log('handleSearch called with query:', query);
+    if (!query.trim()) {
       applyAllFilters(students);
       return;
     }
     try {
-      const searchResults = await searchStudents(searchQuery);
+      const searchResults = await searchStudents(query);
       setFilteredStudents(searchResults);
     } catch (error) {
       console.error('Error searching students:', error);
-      showToast({ title: 'Error', message: error.message || 'Failed to search students', isError: true });
     }
-  }, [searchQuery, students, showToast]);
+  }, [students, showToast]);
+
+  const debouncedSearch = useCallback(
+    debounce((query) => {
+      handleSearch(query);
+    }, 300),
+    [handleSearch]
+  );
+
+  useEffect(() => {
+    debouncedSearch(searchQuery);
+    return () => debouncedSearch.cancel();
+  }, [searchQuery, debouncedSearch]);
 
   const applyAllFilters = useCallback((baseStudents = students) => {
+    console.log('applyAllFilters called with searchQuery:', searchQuery);
     let filtered = [...baseStudents];
     if (statusFilter) {
       filtered = filtered.filter((s) => s.status.toLowerCase() === statusFilter.toLowerCase());
@@ -109,16 +111,17 @@ const Students = () => {
   }, [statusFilter, courseFilter, students]);
 
   const addStudent = (newStudent) => {
+    console.log('New student added:', newStudent);
     try {
       const updatedStudents = [...students, newStudent];
       setStudents(updatedStudents);
-      applyAllFilters(updatedStudents);
+      setSearchQuery(''); // Reset search query when adding new student
       setIsFormOpen(false);
       setSelectedStudent(null);
       setEditMode(false);
-      showToast({ title: 'Success', message: 'Student added successfully!' });
+      showToast({ title: 'Success', message: 'Student added successfully!', icon: successIcon });
     } catch (error) {
-      showToast({ title: 'Error', message: `Failed to add student: ${error.message}`, isError: true });
+      showToast({ title: 'Error', message: `Failed to add student: ${error.message}`, isError: true, icon: errorIcon });
     }
   };
 
@@ -128,22 +131,20 @@ const Students = () => {
         student.id === updatedStudent.id ? updatedStudent : student
       );
       setStudents(updatedList);
-      applyAllFilters(updatedList);
       setIsFormOpen(false);
       setSelectedStudent(null);
       setEditMode(false);
-      showToast({ title: 'Success', message: 'Student updated successfully!' });
+      showToast({ title: 'Success', message: 'Student updated successfully!', icon: successIcon });
     } catch (error) {
-      showToast({ title: 'Error', message: `Failed to update student: ${error.message}`, isError: true });
+      showToast({ title: 'Error', message: `Failed to update student: ${error.message}`, isError: true, icon: errorIcon });
     }
   };
 
   const deleteStudent = (studentId) => {
     const updated = students.filter((s) => s.id !== studentId);
     setStudents(updated);
-    applyAllFilters(updated);
     setSelectedStudent(null);
-    showToast({ title: 'Deleted', message: 'Student deleted successfully!', isDelete: true });
+    showToast({ title: 'Deleted', message: 'Student deleted successfully!', isDelete: true, icon: successIcon });
   };
 
   const handleStudentClick = (student) => {
@@ -167,7 +168,7 @@ const Students = () => {
             placeholder="Search by name, email, or student number"
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            onKeyUp={(e) => e.key === 'Enter' && handleSearch()}
+            autoComplete="off"
           />
           <img src={SearchIcon} alt="Search" className="search-img" />
         </div>
@@ -185,7 +186,6 @@ const Students = () => {
         </div>
       </div>
 
-      {/* Filters */}
       <div className="filter-buttons">
         <select value={statusFilter} onChange={(e) => handleStatusFilter(e.target.value)}>
           <option value="">All Statuses</option>
@@ -202,10 +202,8 @@ const Students = () => {
         </select>
       </div>
 
-      {/* Student List */}
       <StudentsList students={filteredStudents} onStudentClick={handleStudentClick} />
 
-      {/* Form and Details */}
       <AddStudentForm
         isOpen={isFormOpen}
         onClose={() => {

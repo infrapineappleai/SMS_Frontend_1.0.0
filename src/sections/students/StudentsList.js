@@ -6,9 +6,10 @@ import Delete from "../../assets/icons/Delete.png";
 import { useToast } from "../../modals/ToastProvider";
 import AddStudentForm from "../students/AddStudentForm";
 import DeleteConfirmModal from "../../modals/DeleteConfirmModal";
-import successToastIcon from '../../assets/icons/Success.png';
-import errorToastIcon from '../../assets/icons/error.png';
-const baseImageUrl = "https://aradanabeta.pineappleai.cloud/uploads/";
+import successIcon from '../../assets/icons/Success.png';
+import errorIcon from '../../assets/icons/error.png';
+
+const baseImageUrl = "http://localhost:5000/uploads/";
 
 const isValidImageUrl = (url) => {
   if (!url || typeof url !== "string") return false;
@@ -97,7 +98,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
         title: "Error",
         message: "No student selected for deletion",
         isError: true,
-        icon:errorToastIcon
+        icon:errorIcon
       });
       setIsDeleteModalOpen(false);
       setStudentToDelete(null);
@@ -109,7 +110,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
       showToast({
         title: "Success",
         message: "Student deleted successfully!",
-        icon:successToastIcon
+        icon:successIcon
       });
       if (onDeleteStudent) {
         onDeleteStudent(studentToDelete);
@@ -120,7 +121,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
         title: "Error",
         message: err.message || "Failed to delete student",
         isError: true,
-        icon:errorToastIcon
+        icon:errorIcon
       });
     } finally {
       setIsDeleteModalOpen(false);
@@ -143,7 +144,7 @@ const StudentsList = ({ students, onEditStudent, onDeleteStudent, onSaveStudent 
 
   return (
     <div className="main-content">
-      <div className="container">
+      <div className="container1">
         {students.length === 0 ? (
           <div className="empty-message">No students found.</div>
         ) : (

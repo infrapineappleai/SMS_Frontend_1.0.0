@@ -452,7 +452,7 @@ const CourseList = () => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <button className="add-btn" onClick={handleAddCourseClick}>
+        <button className="add-btn1" onClick={handleAddCourseClick}>
           + Add Course
         </button>
       </div>

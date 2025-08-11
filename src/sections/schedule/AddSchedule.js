@@ -10,7 +10,8 @@ import {
   updateSchedule,
   fetchCourses,
   fetchGrades,
-  fetchLecturers  
+  fetchLecturers,
+  fetchBranches
 } from '../../integration/scheduleAPI';
 
 const AddSchedule = ({ isOpen, onClose, schedule, onUpdate, onAdd }) => {
@@ -20,6 +21,7 @@ const AddSchedule = ({ isOpen, onClose, schedule, onUpdate, onAdd }) => {
   const [courses, setCourses] = useState([]);
   const [grades, setGrades] = useState([]);
   const [lecturers, setLecturers] = useState([]);
+  const [branches, setBranches] = useState([]);
   const [loading, setLoading] = useState(false);
 
   const daysOfWeek = [
@@ -36,9 +38,12 @@ const AddSchedule = ({ isOpen, onClose, schedule, onUpdate, onAdd }) => {
     user_id: '',
     course_id: '',
     grade_id: '',
+    branch_id: '',
     days: [],
     startTime: '',
-    endTime: ''
+    startPeriod: 'AM',
+    endTime: '',
+    endPeriod: 'AM'
   });
 
   const [toastData, setToastData] = useState({ title: '', message: '', icon: '' });
@@ -47,15 +52,17 @@ const AddSchedule = ({ isOpen, onClose, schedule, onUpdate, onAdd }) => {
     const fetchMasterData = async () => {
       setLoading(true);
       try {
-        const [coursesData, gradesData, lecturersData] = await Promise.all([
+        const [coursesData, gradesData, lecturersData, branchesData] = await Promise.all([
           fetchCourses(),
           fetchGrades(),
-          fetchLecturers()
+          fetchLecturers(),
+          fetchBranches()
         ]);
 
         setCourses(coursesData);
         setGrades(gradesData);
         setLecturers(lecturersData);
+        setBranches(branchesData);
       } catch (error) {
         console.error('Failed to fetch master data:', error);
         setToastData({
@@ -75,137 +82,177 @@ const AddSchedule = ({ isOpen, onClose, schedule, onUpdate, onAdd }) => {
     }
   }, [isOpen]);
 
-useEffect(() => {
-  const shouldSetFormData =
-    isOpen &&
-    schedule &&
-    lecturers.length > 0 &&
-    courses.length > 0 &&
-    grades.length > 0;
+  useEffect(() => {
+    const shouldSetFormData =
+      isOpen &&
+      schedule &&
+      lecturers.length > 0 &&
+      courses.length > 0 &&
+      grades.length > 0 &&
+      branches.length > 0;
 
-  if (shouldSetFormData) {
-    const timeParts = schedule.time?.split('-').map(t => t.trim()) || [];
+    if (shouldSetFormData) {
+      const timeParts = schedule.time?.split('-').map(t => t.trim()) || [];
+      const start = convertTo12Hour(schedule.startTime || timeParts[0]);
+      const end = convertTo12Hour(schedule.endTime || timeParts[1]);
 
-    const preparedFormData = {
-      user_id: schedule.user_id?.toString() || '',
-      course_id: schedule.course_id?.toString() || '',
-      grade_id: schedule.grade_id?.toString() || '',
-      days: Array.isArray(schedule.days)
-        ? schedule.days
-        : schedule.day
-        ? [schedule.day]
-        : [],
-      startTime: schedule.startTime || timeParts[0] || '',
-      endTime: schedule.endTime || timeParts[1] || '',
-      slot_id: schedule.slot_id || schedule.id || ''
-    };
+      const preparedFormData = {
+        user_id: schedule.user_id?.toString() || '',
+        course_id: schedule.course_id?.toString() || '',
+        grade_id: schedule.grade_id?.toString() || '',
+        branch_id: schedule.branch_id?.toString() || '',
+        days: Array.isArray(schedule.days)
+          ? schedule.days
+          : schedule.day
+          ? [schedule.day]
+          : [],
+        startTime: start.time,
+        startPeriod: start.period,
+        endTime: end.time,
+        endPeriod: end.period,
+        slot_id: schedule.slot_id || schedule.id || ''
+      };
 
-    setFormData(preparedFormData);
-  }
-}, [schedule, isOpen, lecturers, courses, grades]);
+      setFormData(preparedFormData);
+    } else if (isOpen && !schedule) {
+      setFormData({
+        user_id: '',
+        course_id: '',
+        grade_id: '',
+        branch_id: '',
+        days: [],
+        startTime: '',
+        startPeriod: 'AM',
+        endTime: '',
+        endPeriod: 'AM'
+      });
+    }
+  }, [schedule, isOpen, lecturers, courses, grades, branches]);
 
+  const normalizeTimeInput = (input) => {
+    if (!input) return '';
+    let value = input.trim().replace('.', ':');
 
-
-
- const normalizeTimeInput = (input) => {
-  if (!input) return '';
-  let value = input.trim().replace('.', ':');
-
-  // If input is just an hour like "3" or "03"
-  if (/^\d{1,2}$/.test(value)) {
-    return value.padStart(2, '0') + ':00';
-  }
-
-  // If input is hour:minute like "3:00"
-  if (/^\d{1,2}:\d{2}$/.test(value)) {
-    const [hour, minute] = value.split(':');
-    return hour.padStart(2, '0') + ':' + minute;
-  }
-
-  // If already in HH:MM:SS or similar
-  if (/^\d{2}:\d{2}:\d{2}$/.test(value)) {
-    return value;
-  }
-
-  // Fallback
-  return value;
-};
-
-const handleSubmit = async (e) => {
-  e.preventDefault();
-
-  const normalizedStartTime = normalizeTimeInput(formData.startTime);
-  const normalizedEndTime = normalizeTimeInput(formData.endTime);
-
-  if (
-    !formData.user_id ||
-    !formData.course_id ||
-    !formData.grade_id ||
-    !formData.days.length ||
-    !normalizedStartTime ||
-    !normalizedEndTime
-  ) {
-    setIsError(true);
-    setToastData({
-      icon: Error,
-      title: 'Error',
-      message: 'Please fill all required fields',
-    });
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 1000);
-    return;
-  }
-
-  try {
-    const updatedData = {
-      ...formData,
-      startTime: normalizedStartTime,
-      endTime: normalizedEndTime,
-    };
-
-    const isEditMode = !!schedule;
-    let result;
-
-    if (isEditMode) {
-      // ✅ Pass master data to enrich update result
-      result = await updateSchedule(updatedData.slot_id, updatedData, lecturers, courses, grades);
-      onUpdate(result);
-    } else {
-      result = await createSchedule(updatedData);
-      onAdd(result);
+    if (/^\d{1,2}$/.test(value)) {
+      return value.padStart(2, '0') + ':00';
     }
 
-    setIsError(false);
-    setToastData({
-      icon: Success,
-      title: 'Success',
-      message: isEditMode ? 'Schedule updated successfully.' : 'Schedule added successfully.',
-    });
-    setShowToast(true);
+    if (/^\d{1,2}:\d{2}$/.test(value)) {
+      const [hour, minute] = value.split(':');
+      return hour.padStart(2, '0') + ':' + minute;
+    }
 
-    setFormData({
-      user_id: '',
-      course_id: '',
-      grade_id: '',
-      days: [],
-      startTime: '',
-      endTime: '',
-    });
+    return value;
+  };
 
-    setTimeout(() => setShowToast(false), 3000);
-  } catch (error) {
-    setIsError(true);
-    setToastData({
-      icon: Error,
-      title: 'Error',
-      message: error.message,
-    });
-    setShowToast(true);
-    setTimeout(() => setShowToast(false), 3000);
-  }
-};
+  const convertTo24Hour = (time, period) => {
+    if (!time || !period) return '';
+    let [hour, minute] = time.split(':');
+    hour = parseInt(hour, 10);
 
+    if (period === 'PM' && hour !== 12) {
+      hour += 12;
+    } else if (period === 'AM' && hour === 12) {
+      hour = 0;
+    }
 
+    return `${hour.toString().padStart(2, '0')}:${minute}`;
+  };
+
+  const convertTo12Hour = (time) => {
+    if (!time) return { time: '', period: 'AM' };
+    let [hour, minute] = time.split(':');
+    hour = parseInt(hour, 10);
+    let period = 'AM';
+
+    if (hour >= 12) {
+      period = 'PM';
+      if (hour > 12) hour -= 12;
+    } else if (hour === 0) {
+      hour = 12;
+    }
+
+    return { time: `${hour.toString().padStart(2, '0')}:${minute}`, period };
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const normalizedStartTime = normalizeTimeInput(formData.startTime);
+    const startTime24 = convertTo24Hour(normalizedStartTime, formData.startPeriod);
+    const normalizedEndTime = normalizeTimeInput(formData.endTime);
+    const endTime24 = convertTo24Hour(normalizedEndTime, formData.endPeriod);
+
+    if (
+      !formData.user_id ||
+      !formData.course_id ||
+      !formData.grade_id ||
+      !formData.branch_id ||
+      !formData.days.length ||
+      !startTime24 ||
+      !endTime24
+    ) {
+      setIsError(true);
+      setToastData({
+        icon: Error,
+        title: 'Error',
+        message: 'Please fill all required fields',
+      });
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 1000);
+      return;
+    }
+
+    try {
+      const updatedData = {
+        ...formData,
+        startTime: startTime24,
+        endTime: endTime24,
+      };
+
+      const isEditMode = !!schedule;
+      let result;
+
+      if (isEditMode) {
+        result = await updateSchedule(updatedData.slot_id, updatedData, lecturers, courses, grades);
+        onUpdate(result);
+      } else {
+        result = await createSchedule(updatedData);
+        onAdd(result);
+      }
+
+      setIsError(false);
+      setToastData({
+        icon: Success,
+        title: 'Success',
+        message: isEditMode ? 'Schedule updated successfully.' : 'Schedule added successfully.',
+      });
+      setShowToast(true);
+
+      setFormData({
+        user_id: '',
+        course_id: '',
+        grade_id: '',
+        branch_id: '',
+        days: [],
+        startTime: '',
+        startPeriod: 'AM',
+        endTime: '',
+        endPeriod: 'AM',
+      });
+
+      setTimeout(() => setShowToast(false), 3000);
+    } catch (error) {
+      setIsError(true);
+      setToastData({
+        icon: Error,
+        title: 'Error',
+        message: error.message,
+      });
+      setShowToast(true);
+      setTimeout(() => setShowToast(false), 3000);
+    }
+  };
 
   const handleToastClose = () => {
     setShowToast(false);
@@ -233,7 +280,20 @@ const handleSubmit = async (e) => {
       <div className="modal-content">
         <div className="modal-header">
           <h2>{schedule ? 'Edit Schedule' : 'Add Schedule'}</h2>
-          <button className="cancel-btn" onClick={onClose}>
+          <button className="cancel-btn" onClick={() => {
+            setFormData({
+              user_id: '',
+              course_id: '',
+              grade_id: '',
+              branch_id: '',
+              days: [],
+              startTime: '',
+              startPeriod: 'AM',
+              endTime: '',
+              endPeriod: 'AM'
+            });
+            onClose();
+          }}>
             <img src={Close} alt='close' className="cancel-icon" />
           </button>
         </div>
@@ -245,6 +305,24 @@ const handleSubmit = async (e) => {
         ) : (
           <form onSubmit={handleSubmit}>
             <div className="form-row">
+              <div className="form-group">
+                <label>Branch</label>
+                <select
+                  id="branch_id"
+                  name="branch_id"
+                  value={formData.branch_id}
+                  onChange={handleChange}
+                  required
+                >
+                  <option value="">Select Branch</option>
+                  {branches.map(branch => (
+                    <option key={branch.id} value={branch.id}>
+                      {branch.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
               <div className="form-group">
                 <label>Lecturer Name</label>
                 <select
@@ -337,28 +415,58 @@ const handleSubmit = async (e) => {
             <div className="form-row">
               <div className="form-group">
                 <label>Start Time</label>
-                <input
-                  type="text"
-                  id="startTime"
-                  name="startTime"
-                  value={formData.startTime}
-                  onChange={handleChange}
-                  placeholder="e.g., 08:00 or 8.00"
-                  required
-                />
+                <div className="time-input-group">
+                  <input
+                    type="text"
+                    id="startTime"
+                    name="startTime"
+                    value={formData.startTime}
+                    onChange={handleChange}
+                    placeholder="e.g., 8:00"
+                    required
+                  />
+                </div>
               </div>
+              <div className="form-group">
+                <label>AM/PM</label>
+                <select
+                  name="startPeriod"
+                  value={formData.startPeriod}
+                  onChange={handleChange}
+                >
+                  <option value="">Select Period</option>
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
+              </div>
+
+              <div className="form-group"></div>
 
               <div className="form-group">
                 <label>End Time</label>
-                <input
-                  type="text"
-                  id="endTime"
-                  name="endTime"
-                  value={formData.endTime}
+                <div className="time-input-group">
+                  <input
+                    type="text"
+                    id="endTime"
+                    name="endTime"
+                    value={formData.endTime}
+                    onChange={handleChange}
+                    placeholder="e.g., 9:00"
+                    required
+                  />
+                </div>
+              </div>
+              <div className="form-group">
+                <label>AM/PM</label>
+                <select
+                  name="endPeriod"
+                  value={formData.endPeriod}
                   onChange={handleChange}
-                  placeholder="e.g., 09:00 or 9.00"
-                  required
-                />
+                >
+                  <option value="">Select Period</option>
+                  <option value="AM">AM</option>
+                  <option value="PM">PM</option>
+                </select>
               </div>
             </div>
 

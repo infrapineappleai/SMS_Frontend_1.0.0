@@ -94,12 +94,14 @@ export const getStudentBranches = async (studentId) => {
 
 export const createStudent = async (data) => {
   try {
-    const studentDetails = JSON.parse(data.get('student_details') || '{}');
-    if (!studentDetails.student_no) {
-      throw new Error('student_no is required in student_details');
+    const userDetails = JSON.parse(data.get('user') || '{}');
+    const studentDetails = data.get('student_details') ? JSON.parse(data.get('student_details') || '{}') : {};
+
+    if (userDetails.role === 'student' && !studentDetails.student_no) {
+      throw new Error('student_no is required in student_details for students');
     }
 
-    console.log('Sending student creation payload:', data);
+    console.log('Sending student creation payload:', [...data.entries()]);
 
     const response = await axios.post(`${API_URL}/students/finalize`, data, {
       headers: { 'Content-Type': 'multipart/form-data' },
@@ -111,23 +113,24 @@ export const createStudent = async (data) => {
       throw new Error('Student ID not found in response');
     }
 
-    const [grades, slots, branches] = await Promise.all([
-      axios.get(`${API_URL}/courses/student/${studentId}/grades`),
-      getStudentSlots(studentId),
-      getStudentBranches(studentId),
-    ]);
+    let grades = [], slots = [], branches = [], assignedCourses = [];
+    if (userDetails.role === 'student') {
+      [grades, slots, branches] = await Promise.all([
+        axios.get(`${API_URL}/courses/student/${studentId}/grades`),
+        getStudentSlots(studentId),
+        getStudentBranches(studentId),
+      ]);
 
-    const courses = await axios.get(`${API_URL}/courses`);
-    const courseMap = new Map(courses.data.map(c => [c.id, c.name]));
+      const courses = await axios.get(`${API_URL}/courses`);
+      const courseMap = new Map(courses.data.map(c => [c.id, c.name]));
 
-    const assignedCourses = grades.data.map(grade => ({
-      course: courseMap.get(grade.Grade?.Course?.id) || 'N/A',
-      grade: grade.Grade?.grade_name || 'N/A',
-    }));
+      assignedCourses = grades.data.map(grade => ({
+        course: courseMap.get(grade.Grade?.Course?.id) || 'N/A',
+        grade: grade.Grade?.grade_name || 'N/A',
+      }));
+    }
 
-    const userDetails = JSON.parse(data.get('user') || '{}');
-
-        const photoUrl = response.data.photo_url
+      const photoUrl = response.data.photo_url
       ? `${IMAGE_BASE_URL}${response.data.photo_url}`
       : '/default-avatar.png';
 
@@ -135,14 +138,18 @@ export const createStudent = async (data) => {
       ...response.data,
       user_id: studentId,
       ...userDetails,
-      ...studentDetails,
+      ...(userDetails.role === 'student' ? studentDetails : {}),
       photo_url: photoUrl,
       assignedCourses,
       schedules: slots,
       branch: branches.length > 0 ? branches[0].branch_name : 'N/A',
     };
   } catch (error) {
-    console.error('Error creating student:', error.response?.data || error.message);
+    console.error('Error creating student:', {
+      message: error.message,
+      response: error.response?.data,
+      payload: [...data.entries()],
+    });
     throw new Error(error.response?.data?.error || 'Failed to create student');
   }
 };
@@ -178,9 +185,11 @@ export const uploadStudentPhoto = async (userId, photoFile) => {
     });
 
     console.log('Photo uploaded successfully:', response.data);
+
     const photoUrl = response.data.photo_url
       ? `${IMAGE_BASE_URL}${response.data.photo_url}`
       : '/default-avatar.png';
+
     return { ...response.data, photo_url: photoUrl };
   } catch (error) {
     console.error('Error uploading photo:', error.response?.data || error.message);
@@ -249,80 +258,77 @@ export const updateStudent = async (userId, data) => {
   }
 };
 
-export const getAllStudents = async () => {
+
+
+export const getAllUsers = async (role = null) => {
   try {
-    const response = await axios.get(`${API_URL}/users?role=student`);
+    const url = role ? `${API_URL}/users?role=${role}` : `${API_URL}/users`;
+    const response = await axios.get(url);
     const courses = await axios.get(`${API_URL}/courses`);
     const courseMap = new Map(courses.data.map(c => [c.id, (c.name || 'N/A').trim().toLowerCase()]));
-    console.log('getAllStudents: Course map:', Array.from(courseMap.entries()));
 
-    const students = await Promise.all(
-      response.data.map(async (student) => {
+    const users = await Promise.all(
+      response.data.map(async (user) => {
         try {
           const [profile, grades, slots, branches] = await Promise.all([
-            axios.get(`${API_URL}/students/${student.id}/profile`),
-            axios.get(`${API_URL}/courses/student/${student.id}/grades`),
-            getStudentSlots(student.id),
-            getStudentBranches(student.id),
+            axios.get(`${API_URL}/students/${user.id}/profile`),
+            axios.get(`${API_URL}/courses/student/${user.id}/grades`),
+            getStudentSlots(user.id),
+            getStudentBranches(user.id),
           ]);
-
-          console.log(`Branches for student ${student.id}:`, branches);
-          console.log(`Slots for student ${student.id}:`, slots);
-          console.log(`Grades for student ${student.id}:`, grades.data);
 
           const courseNames = grades.data
             .map(grade => courseMap.get(grade.Grade?.Course?.id))
             .filter(Boolean);
 
-           
-            const photoUrl = profile.data.StudentDetail?.photo_url
+          const photoUrl = profile.data.StudentDetail?.photo_url
             ? `${IMAGE_BASE_URL}${profile.data.StudentDetail.photo_url}`
             : '/default-avatar.png';
 
              console.log(photoUrl);
 
-          const studentData = {
-            ...student,
-            student_no: profile.data.StudentDetail?.student_no || 'N/A',
+          const userData = {
+            ...user,
+            student_no: user.role === 'student' ? (profile.data.StudentDetail?.student_no || 'N/A') : 'N/A',
             photo_url:photoUrl,
-            salutation: profile.data.StudentDetail?.salutation || '',
-            phn_num: student.phn_num || profile.data.StudentDetail?.phn_num || 'N/A',
-            ice_contact: profile.data.StudentDetail?.ice_contact || student.ice_contact || 'N/A',
-            student_details: {
+            salutation: user.role === 'student' ? (profile.data.StudentDetail?.salutation || '') : '',
+            phn_num: user.phn_num || profile.data.StudentDetail?.phn_num || 'N/A',
+            ice_contact: profile.data.StudentDetail?.ice_contact || user.ice_contact || 'N/A',
+            student_details: user.role === 'student' ? {
               student_no: profile.data.StudentDetail?.student_no || 'N/A',
               photo_url: photoUrl,
               salutation: profile.data.StudentDetail?.salutation || '',
-              ice_contact: profile.data.StudentDetail?.ice_contact || student.ice_contact || 'N/A',
-            },
-            status: (student.status || 'active').trim().toLowerCase(),
-            course: courseNames.length > 0 ? courseNames.join(', ') : 'N/A',
-            assignedCourses: grades.data.length > 0 ? grades.data.map(grade => ({
+              ice_contact: profile.data.StudentDetail?.ice_contact || user.ice_contact || 'N/A',
+            } : {},
+            status: (user.status || 'active').trim().toLowerCase(),
+            course: user.role === 'student' ? (courseNames.length > 0 ? courseNames.join(', ') : 'N/A') : 'N/A',
+            assignedCourses: user.role === 'student' ? (grades.data.length > 0 ? grades.data.map(grade => ({
               course: courseMap.get(grade.Grade?.Course?.id) || 'N/A',
               grade: grade.Grade?.grade_name || 'N/A',
               course_id: grade.Grade?.Course?.id || null,
               grade_id: grade.Grade?.id || null,
-            })) : [],
-            schedules: slots || [],
-            branch: branches.length > 0 ? branches[0].branch_name : 'N/A',
+            })) : []) : [],
+            schedules: user.role === 'student' ? slots : [],
+            branch: user.role === 'student' ? (branches.length > 0 ? branches[0].branch_name : 'N/A') : 'N/A',
           };
-          console.log(`Student ${student.id} data:`, studentData);
-          return studentData;
+          console.log(`User ${user.id} data:`, userData);
+          return userData;
         } catch (error) {
-          console.error(`Failed to fetch profile or grades for student ${student.id}:`, error);
+          console.error(`Failed to fetch profile or grades for user ${user.id}:`, error);
           return {
-            ...student,
-            student_no: 'N/A',
+            ...user,
+            student_no: user.role === 'student' ? 'N/A' : 'N/A',
             photo_url: '/default-avatar.png',
             salutation: '',
-            phn_num: student.phn_num || 'N/A',
-            ice_contact: student.ice_contact || 'N/A',
-            student_details: {
+            phn_num: user.phn_num || 'N/A',
+            ice_contact: user.ice_contact || 'N/A',
+            student_details: user.role === 'student' ? {
               student_no: 'N/A',
               photo_url: '/default-avatar.png',
               salutation: '',
-              ice_contact: student.ice_contact || 'N/A',
-            },
-            status: (student.status || 'active').trim().toLowerCase(),
+              ice_contact: user.ice_contact || 'N/A',
+            } : {},
+            status: (user.status || 'active').trim().toLowerCase(),
             course: 'N/A',
             assignedCourses: [],
             schedules: [],
@@ -332,12 +338,16 @@ export const getAllStudents = async () => {
       })
     );
 
-    console.log('getAllStudents: Final students list:', students);
-    return students;
+    console.log('getAllUsers: Final users list:', users);
+    return users;
   } catch (error) {
-    console.error('Error fetching students:', error);
-    throw new Error(error.response?.data?.error || 'Failed to fetch students');
+    console.error('Error fetching users:', error);
+    throw new Error(error.response?.data?.error || 'Failed to fetch users');
   }
+};
+
+export const getAllStudents = async () => {
+  return getAllUsers('student');
 };
 
 export const deleteStudent = async (userId) => {

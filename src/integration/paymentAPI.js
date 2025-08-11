@@ -11,7 +11,7 @@ const PaymentAPI = ({ isOpen, onClose, onPaymentSuccess }) => {
   const [currentStep, setCurrentStep] = useState(1);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [feesData, setFeesData] = useState(null);
-  const [selectedMonths, setSelectedMonths] = useState([]); // Always initialize as array
+  const [selectedMonths, setSelectedMonths] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState(null);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
