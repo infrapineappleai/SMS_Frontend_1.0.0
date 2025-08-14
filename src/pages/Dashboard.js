@@ -1,9 +1,11 @@
 import React from "react";
 
+import DashBoard from "../sections/dashboard/dashboard.js"
+
 function Dashboard() {
   return (
-    <div className="Dashboard">
-      <h1>Dashboard</h1>
+    <div>
+      <DashBoard/>
     </div>
   );
 }

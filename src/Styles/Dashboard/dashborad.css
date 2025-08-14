@@ -1,0 +1,650 @@
+.app {
+  font-family: sans-serif;
+  min-height: 100vh;
+  background: #ffffff;
+  overflow: auto;     
+  margin-top: -30px;
+
+}
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  margin-bottom: 20px;
+  margin-right: auto;
+
+}
+
+.custom-select-container {
+  display: flex;
+  align-items: center;
+  gap: 4px; /* Keep gap for spacing between elements */
+  width: fit-content;
+  background-color: #ffffff;
+  border: none; /* Remove the extra border box */
+  border-radius: 4px;
+  
+}
+
+.custom-select-wrapper {
+  position: relative;
+  display: inline-block;
+  width: auto;
+}
+
+.custom-select {
+    padding: 6px 28px 6px 10px;
+    width: 100%;
+    font-size: 16px;
+    font-family: 'Poppins', sans-serif;
+    border: 1px solid #1F6978;
+    border-radius: 4px;
+    background-color: #fff;
+    color: #000000;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+.filter-icon {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  pointer-events: none; /* Let clicks pass through to select */
+}
+
+.custom-select:focus {
+  border-color: #3b82f6;
+  outline: none;
+}
+
+.total-students {
+  font-size: 14px;
+  color: #374151;
+  font-weight: 500;
+}
+
+
+
+
+
+
+
+
+.fc-header-toolbar {
+  padding: 10px 20px;
+  background: #f9fafb;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.fc-toolbar-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.fc-button {
+  padding: 6px 12px;
+  margin: 0 5px;
+  background: #f3f4f6;
+  border: 1px solid #e5e7eb;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.fc-button:hover {
+  background: #e5e7eb;
+}
+
+.fc-button-active {
+  background: #3b82f6;
+  color: #ffffff;
+  border-color: #3b82f6;
+}
+
+.fc-col-header-cell {
+  background: #f9fafb;
+  border: 1px solid #e5e7eb;
+  padding: 10px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.fc-col-header-cell:hover {
+  background: #f3f4f6;
+}
+
+.fc-timegrid-slot-label {
+  background: #fafafa;
+  border-right: 1px solid #e5e7eb;
+  padding: 8px 10px;
+  text-align: right;
+  font-size: 12px;
+  font-weight: 500;
+  color: #6b7280;
+  position: sticky;
+  left: 0;
+  z-index: 10;
+}
+
+.fc-timegrid-slot {
+  border: 1px solid #e5e7eb;
+  min-height: 100px; /* Minimum height to start */
+  background: #ffffff;
+  position: relative; /* Ensure events stay within bounds */
+}
+
+.fc-timegrid-slot:hover {
+  background: #f9fafb;
+}
+
+
+
+
+.student-item {
+  display: flex;
+  align-items: center;
+  margin: 0;
+  text-align: center;
+}
+
+
+
+.more-btn {
+  font-size: 12px; /* Increased for visibility */
+  color: #dc2626; /* Red for contrast */
+  margin-left: 4px;
+  padding: 2px 5px; /* Add padding */
+  background: #fee2e2; /* Light red background */
+  border-radius: 3px; /* Rounded corners */
+  display: inline-block; /* Ensure it displays */
+}
+
+
+
+.student-image {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 1px solid #0e6368;
+  transition: transform 0.2s ease;
+}
+
+.student-image:hover {
+  transform: scale(1.1);
+}
+
+
+.total-students {
+  font-size: 16px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+
+
+
+
+
+/* Style the time grid slots to make them taller */
+.fc-timegrid-slot {
+  height: 100px !important; /* Increase height of each time slot */
+    min-height: 120px !important;
+    
+
+}
+
+/* Adjust the day columns to make them wider */
+.fc-timegrid-col {
+  width: 150px !important; /* Increase width of each day column */
+  padding: 10px; /* Add padding for better spacing */
+  column-gap: 15px;
+  
+}
+
+/* Ensure event boxes fit within the larger slots */
+.fc-event {
+  padding: 10px;
+  min-height: 80px;
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+
+
+/* Optional: Ensure the header fits the wider columns */
+.fc-col-header-cell {
+  padding: 10px;
+  font-size: 16px;
+  
+}
+
+.day-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  flex: 1; /* Ensures equal width for each day header */
+
+
+  padding: 10px;
+  border-bottom: 1px solid #DFDFDF;
+  background-color: #ffffff;
+  font-weight: bold;
+}
+
+
+
+
+
+.time-slot-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 100%; /* Ensure it fills the grid column */
+  padding: 10px;
+  border-bottom: 1px solid #DFDFDF;
+  background: #fff;
+  box-sizing: border-box;
+  font-weight: bold;
+
+
+
+  
+}
+
+
+
+
+
+
+.calendar-header, .time-row {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 150px); /* 1 column for time, 7 days */
+  min-width: 10%;
+  
+  
+}
+
+.calendar-container {
+  background: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  max-width: 100%;
+    display: grid;
+  grid-template-columns: 1fr; /* Single column for the grid */
+  border: 1px solid #ccc;
+
+
+  min-width: 1400px;  /* ✅ Ensures horizontal scroll if too small */
+  min-height: 800px;  /* ✅ Ensures vertical scroll */
+
+}
+
+
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: 100px repeat(7, 1fr);
+  background-color: #ffffff;
+  color: rgb(0, 0, 0);
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 0;
+
+  width: 100%;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.location-select select {
+  padding: 8px 12px;
+  font-size: 16px;
+}
+
+.total-students {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.calendar {
+  border-radius: 8px;
+  overflow: scroll; /* ✅ Enable both horizontal and vertical scrolling */
+  max-height: none;       /* ✅ allow full height */
+  min-width: auto;        /* ✅ allow full width */
+}
+
+
+
+
+
+
+
+.calendar-body {
+  display: grid;
+  grid-template-rows: auto;
+  flex-direction: column;
+    
+}
+
+
+.time-label {
+  padding: 10px;
+  background-color: #ffffff;
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+  height: 95.5%;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 4px 0px #6D6D6D33;
+
+  /* Add your custom style */
+  border: 0.4px solid #0000000D;
+
+  /* Vertical spacing */
+  margin-top: 5px;
+  margin-bottom: 30px;
+  margin-right:6px;
+}
+
+/* 
+.day-cell {
+  padding: 8px;
+  text-align: center;
+  min-height: 80px;
+  border-left: 1px solid #eee;
+} */
+
+/* .student-img {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  margin: 2px;
+} */
+
+
+
+
+
+
+
+
+
+.day-cell {
+  padding: px;
+  text-align: left;
+  min-height: 120px;
+  background: #fff;
+  box-sizing: border-box;
+  box-shadow: 0px 2px 6px 0px #6D6D6D33;
+padding: 8px; /* Optional: Adds internal spacing for content */
+box-sizing: border-box; /* Ensures padding doesn't affect dimensions */
+margin-right: 0px; /* Reset right margin if previously set */
+  margin-left: 0px; /* Reset left margin if previously set */
+  margin-bottom: 6px; /* Keep vertical gap */
+  margin-top: 6px; /* Keep vertical gap */
+}
+
+
+.student-info {
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  margin-bottom: 4px;
+  
+}
+
+.student-img {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+    margin-right: 4px; /* ✅ Adjust this to get desired spacing */
+
+}
+
+.student-name {
+  font-size: 14px;
+  color: #000000;
+  white-space: nowrap;
+  font-weight: 400;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 80px;
+  font-family: 'poppins';
+}
+
+
+.more-btn {
+  margin-top: 4px;
+  font-size: 13px;
+  color: #888;
+  font-style: italic;
+}
+
+
+
+
+/* Mobile Responsiveness */
+@media (max-width: 1024px) {
+  .app {
+    padding: 10px;
+    overflow-x: auto; /* Enable horizontal scrolling for the app if needed */
+  }
+
+  .calendar-container {
+    padding: 10px;
+    min-width: 100%; /* Allow full width with scroll */
+    overflow-x: auto; /* Enable horizontal scrolling for the calendar */
+    overflow-y: auto; /* Enable vertical scrolling if content overflows */
+  }
+
+  .calendar-header,
+  .time-row {
+    grid-template-columns: 80px repeat(7, 120px); /* Reduce column widths */
+    column-gap: 10px; /* Reduce gap for smaller screens */
+    min-width: 100%; /* Ensure it fits with scroll */
+  }
+
+  .header {
+    padding: 10px;
+    margin-bottom: 10px;
+  }
+
+  .custom-select {
+    padding: 6px 10px 6px 20px;
+    font-size: 12px;
+  }
+
+  .filter-icon {
+    width: 12px;
+    height: 12px;
+    right: 8px;
+  }
+
+  .total-students {
+    font-size: 12px;
+    margin-left: 10px;
+  }
+
+  .day-header,
+  .day-cell {
+    min-height: 60px;
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  .time-label {
+    padding: 6px;
+    font-size: 10px;
+    margin-top: 3px;
+    margin-bottom: 15px;
+  }
+
+  .student-img {
+    width: 20px;
+    height: 20px;
+  }
+
+  .student-name {
+    font-size: 10px;
+    max-width: 60px;
+  }
+
+  .more-btn {
+    font-size: 10px;
+    padding: 1px 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  .app {
+    padding: 5px;
+    overflow-x: auto; /* Enable horizontal scrolling */
+  }
+
+  .calendar-container {
+    padding: 5px;
+    min-width: 100%; /* Allow full width with scroll */
+    overflow-x: auto; /* Horizontal scrollbar */
+    overflow-y: auto; /* Vertical scrollbar */
+  }
+
+  .calendar-header,
+  .time-row {
+    grid-template-columns: 60px repeat(7, 90px); /* Further reduce column widths */
+    column-gap: 5px; /* Smaller gap for mobile */
+    min-width: 100%; /* Ensure it fits with scroll */
+  }
+
+  .header {
+    padding: 8px;
+  }
+
+  .custom-select {
+    padding: 4px 8px 4px 15px;
+    font-size: 10px;
+  }
+
+  .filter-icon {
+    width: 10px;
+    height: 10px;
+    right: 6px;
+  }
+
+  .total-students {
+    font-size: 10px;
+    margin-left: 5px;
+  }
+
+  .day-header,
+  .day-cell {
+    min-height: 50px;
+    padding: 4px;
+    font-size: 10px;
+  }
+
+  .time-label {
+    padding: 4px;
+    font-size: 9px;
+    margin-top: 2px;
+    margin-bottom: 10px;
+  }
+
+  .student-img {
+    width: 18px;
+    height: 18px;
+  }
+
+  .student-name {
+    font-size: 9px;
+    max-width: 50px;
+  }
+
+  .more-btn {
+    font-size: 9px;
+    padding: 1px 2px;
+  }
+}

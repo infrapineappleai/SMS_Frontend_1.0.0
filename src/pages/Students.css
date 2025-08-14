@@ -70,13 +70,20 @@
 }
 
 .add-student-btn {
-  padding: 10px 20px;
-  background-color: #1f6978;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
+    width: 170px;
+    height: 46px;
+    border-radius: 5px;
+    background-color: #1F6978;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 17px;
+    font-family: 'Montserrat';
+    font-weight: 700;
+    padding: 13px 15px;
+    display: flex;
+    text-align: center;
+    
 }
 
 .add-student-btn:hover {
