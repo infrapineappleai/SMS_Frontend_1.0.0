@@ -34,7 +34,7 @@ const StudentProfilePopup = ({
   const getFullImageUrl = (url) => {
     if (!url) return "/default-avatar.png";
     if (url.startsWith("http") || url.startsWith("data:image/")) return url;
-    return `http://localhost:5000/uploads/${url.replace(/^\/?uploads\//i, "")}`;
+    return `http://aradanabeta.pineappleai.cloud:5000/uploads/${url.replace(/^\/?uploads\//i, "")}`;
   };
 
   const profileImageUrl = getFullImageUrl(studentData.photo_url);

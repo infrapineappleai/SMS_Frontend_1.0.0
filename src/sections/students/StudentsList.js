@@ -9,7 +9,7 @@ import DeleteConfirmModal from "../../modals/DeleteConfirmModal";
 import successIcon from '../../assets/icons/Success.png';
 import errorIcon from '../../assets/icons/error.png';
 
-const baseImageUrl = "http://localhost:5000/uploads/";
+const baseImageUrl = "http://aradanabeta.pineappleai.cloud:5000/uploads/";
 
 const isValidImageUrl = (url) => {
   if (!url || typeof url !== "string") return false;
